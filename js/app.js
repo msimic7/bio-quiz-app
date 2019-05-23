@@ -9,12 +9,16 @@ const submitBtn = document.querySelector("#submitBtn");
 const nextBtn = document.querySelector("#nextBtn");
 const backBtn = document.querySelector("#backBtn");
 const allScoresBtns = document.querySelectorAll(".allScoresBtn");
+const saveBtn = document.querySelector(".saveBtn");
+const questionNum = document.querySelector(".questionNum");
 
 let tl = new TimelineMax();
 tl.add(TweenMax.to(homeBtns, 0.8, { opacity: 1, width: "95%" }));
 tl.add(
-  TweenMax.from(content, 0.8, {
+  TweenMax.from(content, 1, {
     opacity: 0,
+    height: 0,
+    width: 0,
     ease: Expo.easeOut
   })
 );
@@ -90,7 +94,7 @@ leftSideContent.addEventListener("click", function() {
 });
 
 backBtn.addEventListener("click", function() {
-  let tl2 = new TimelineMax();
+  /* let tl2 = new TimelineMax();
   tl2.add(TweenMax.to(".content", 0.3, { opacity: 0 }));
   setTimeout(function() {
     showQuiz();
@@ -108,7 +112,8 @@ backBtn.addEventListener("click", function() {
   isElemVisable(backBtn, false);
   isElemVisable(timer, false);
   isElemVisable(submitBtn, false);
-  isElemVisable(nextBtn, false);
+  isElemVisable(nextBtn, false);*/
+  location.reload();
 });
 
 submitBtn.addEventListener("click", function() {
@@ -137,7 +142,7 @@ submitBtn.addEventListener("click", function() {
     for (let i = 0; i < answers.length; i++) {
       let answer = answers[i];
 
-      lab[i].classList.add("no-before");
+      //lab[i].classList.add("no-before");
       lab[i].classList.remove("before");
       answer.disabled = true;
     }
@@ -219,6 +224,8 @@ submitBtn.addEventListener("click", function() {
 
 nextBtn.addEventListener("click", function() {
   if (currentQuestion == questions.length) {
+    isElemVisable(saveBtn, false);
+    isElemVisable(questionNum, false);
     clearInterval(x);
     isElemVisable(timer, false);
     contentMain.className = "contentMain scores";
@@ -379,8 +386,11 @@ function myFunc(event) {
 
 function generateTest(catId) {
   showQuiz();
+  contentTitle.classList.add("questionText");
   isElemVisable(backBtn, false);
   isElemVisable(submitBtn, true);
+  isElemVisable(saveBtn, true);
+  isElemVisable(questionNum, true);
   pickCategory(catId);
 
   if (catId == -1) {
@@ -404,18 +414,15 @@ function categories() {
   isElemVisable(backBtn, true);
   let titleText = document.createTextNode("CATEGORIES");
   contentTitle.appendChild(titleText);
+  contentTitle.classList.add("titleText");
   let i = 0;
   questionData.forEach(category => {
     let categoryDiv = document.createElement("div");
     let categoryName = document.createTextNode(category.catID);
-    let categoryNumOfQuestions = document.createTextNode(
-      "[" + category.items.length + "]"
-    );
     let categoryP = document.createElement("p");
     categoryP.appendChild(categoryName);
-    categoryP.appendChild(categoryNumOfQuestions);
     categoryDiv.appendChild(categoryP);
-    categoryDiv.classList.add("category");
+    categoryDiv.className = "btn category";
     categoryDiv.dataset.id = i.toString();
     contentMain.appendChild(categoryDiv);
     i++;
@@ -482,6 +489,7 @@ function displayQuestion(question) {
   contentTitle.innerHTML = "";
 
   let currQuest = currentQuestion + 1;
+  questionNum.innerHTML = currQuest + ".";
   //saveCurrentQuestion = question;
 
   let questionNumb = currQuest.toString() + ".";
@@ -794,7 +802,7 @@ function generateAllScores() {
   let testNames = ["TEST 60", "BOOK1", "BOOK2", "BOOK 3"];
   for (let i = 0; i < testNames.length; i++) {
     let div = document.createElement("div");
-    div.classList.add("allScoresBtn");
+    div.className = "btn allScoresBtn";
     div.dataset.id = i.toString();
     let divText = document.createTextNode(testNames[i]);
     let divP = document.createElement("p");
@@ -804,6 +812,7 @@ function generateAllScores() {
   }
   let titleText = document.createTextNode("ALL SCORES");
   contentTitle.appendChild(titleText);
+  contentTitle.classList.add("titleText");
   TweenMax.from(".allScoresBtn", 1, { scale: 0, ease: Expo.easeOut });
   TweenMax.from(".allScoresBtn p", 1.2, { opacity: 0, delay: 1 });
   let func;
@@ -843,6 +852,7 @@ function generateScores(testType) {
     let buttonsCount = buttons.length;
     for (let i = 0; i < buttonsCount; i++) {
       buttons[i].onclick = function() {
+        contentMain.style.overflowY = "scroll";
         generateScoresT60More(allTestScores[this.value].allScores);
       };
     }
