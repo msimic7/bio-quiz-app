@@ -45,6 +45,7 @@ body {
   -ms-flex-pack: distribute;
       justify-content: space-around;
   overflow: hidden;
+  padding-left: 5%;
 }
 
 .homeBtn {

@@ -10,12 +10,8 @@ const nextBtn = document.querySelector("#nextBtn");
 const backBtn = document.querySelector("#backBtn");
 const allScoresBtns = document.querySelectorAll(".allScoresBtn");
 
-console.log("====================================");
-console.log(homeBtnPs);
-console.log("====================================");
-
 let tl = new TimelineMax();
-tl.add(TweenMax.to(homeBtns, 0.8, { opacity: 1, width: "90%" }));
+tl.add(TweenMax.to(homeBtns, 0.8, { opacity: 1, width: "95%" }));
 tl.add(
   TweenMax.from(content, 0.8, {
     opacity: 0,
@@ -87,21 +83,28 @@ function initApp() {
 
 initApp();
 
-/*EVENTS*/
+/* EVENTS */
 
 leftSideContent.addEventListener("click", function() {
-  // homeBtns.forEach(homeBtn => {
-  //   isElemVisable(homeBtn, false);
-  // });
   myFunc(event);
 });
 
 backBtn.addEventListener("click", function() {
-  tl1.reverse();
+  let tl2 = new TimelineMax();
+  tl2.add(TweenMax.to(".content", 0.3, { opacity: 0 }));
+  setTimeout(function() {
+    showQuiz();
+    homeBtns.forEach(el => {
+      isElemVisable(el, true);
+    });
+  }, 320);
+  setTimeout(function() {
+    tl1.pause(0);
+    tl.pause(0);
+    tl.play();
+  }, 630);
+
   showQuiz();
-  homeBtns.forEach(homeBtn => {
-    isElemVisable(homeBtn, true);
-  });
   isElemVisable(backBtn, false);
   isElemVisable(timer, false);
   isElemVisable(submitBtn, false);
@@ -216,11 +219,9 @@ submitBtn.addEventListener("click", function() {
 
 nextBtn.addEventListener("click", function() {
   if (currentQuestion == questions.length) {
+    clearInterval(x);
+    isElemVisable(timer, false);
     contentMain.className = "contentMain scores";
-    if (distance > 0) {
-      clearInterval(x);
-      timer.classList.add("hide");
-    }
 
     contentMain.innerHTML = "";
     contentTitle.innerHTML = "";
@@ -290,6 +291,10 @@ nextBtn.addEventListener("click", function() {
     console.log("==========NEW BOOK2 FF==========");
     console.log(testFFB2);
     console.log("====================================");
+
+    setTimeout(function() {
+      categories();
+    }, 2000);
   } else {
     displayQuestion(questions[currentQuestion]);
 
@@ -299,44 +304,57 @@ nextBtn.addEventListener("click", function() {
   }
 });
 
-/*MAIN FUNCTIONS*/
+/* MAIN FUNCTIONS */
+
+function animateHomeBtnsOut(btnEvent) {
+  console.log("INSIDE ANIM OUT" + btnEvent);
+  let tl11 = new TimelineMax();
+  tl11.pause();
+  tl11.add(TweenMax.to(btnEvent, 0.4, { xPercent: 115, opacity: 0 }));
+  tl11.add(TweenMax.to(homeBtns, 0.4, { opacity: 0 }), "-=0.3");
+  tl11.add(
+    TweenMax.to(btnEvent, 0.4, {
+      xPercent: 0,
+      opacity: 0
+    })
+  );
+  tl11.add(TweenMax.to(homeBtnPs, 0.7, { opacity: 0 }), "-=0.3");
+  tl11.addCallback(function() {
+    homeBtns.forEach(el => {
+      isElemVisable(el, false);
+    });
+  }, 0.9);
+  tl1 = tl11;
+  tl1.pause(0);
+  tl1.play();
+}
 
 function myFunc(event) {
-  let button = event.target.dataset.name;
+  let button1 = event.target.dataset.name;
+  let button2 = event.target.parentNode.dataset.name;
+  let button = button1 == undefined ? button2 : button1;
+  let ev = button1 == undefined ? event.target.parentNode : event.target;
+  console.log(button);
 
   if (button != undefined) {
     switch (button) {
       case "test60":
         catId = -1;
-        //tl1.play();
-        //tl1.pause();
-        tl1.add(TweenMax.to(event.target, 0.4, { xPercent: 115, opacity: 0 }));
-        tl1.add(TweenMax.to(homeBtns, 0.4, { opacity: 0, width: "0%" }));
-        tl1.add(
-          TweenMax.to(event.target, 0.4, {
-            xPercent: 0,
-            opacity: 0,
-            width: "0%"
-          })
-        );
-        tl1.add(TweenMax.to(homeBtnPs, 0.7, { opacity: 0 }), "-=0.3");
-        /*tl1.addCallback(function() {
-          homeBtns.forEach(el => {
-            isElemVisable(el, false);
-          });
-        }, 0.9);*/
+        animateHomeBtnsOut(ev);
         generateTest(catId);
         break;
       case "cat":
+        animateHomeBtnsOut(ev);
         categories();
         break;
       case "allSc":
+        animateHomeBtnsOut(ev);
         generateAllScores();
         break;
       case "allQw":
+        animateHomeBtnsOut(ev);
         catId = -1;
         pickCategory(catId);
-
         resetValidQuestions(questions);
         let newWr = [];
         localStorage.setItem("scores", JSON.stringify(newWr));
@@ -361,7 +379,7 @@ function myFunc(event) {
 
 function generateTest(catId) {
   showQuiz();
-  isElemVisable(backBtn, true);
+  isElemVisable(backBtn, false);
   isElemVisable(submitBtn, true);
   pickCategory(catId);
 
@@ -772,17 +790,22 @@ function generateAllScores() {
   contentMain.innerHTML = "";
   contentMain.className = "contentMain allScores";
   isElemVisable(backBtn, true);
+
   let testNames = ["TEST 60", "BOOK1", "BOOK2", "BOOK 3"];
   for (let i = 0; i < testNames.length; i++) {
     let div = document.createElement("div");
     div.classList.add("allScoresBtn");
     div.dataset.id = i.toString();
     let divText = document.createTextNode(testNames[i]);
-    div.appendChild(divText);
+    let divP = document.createElement("p");
+    divP.appendChild(divText);
+    div.appendChild(divP);
     contentMain.appendChild(div);
   }
   let titleText = document.createTextNode("ALL SCORES");
   contentTitle.appendChild(titleText);
+  TweenMax.from(".allScoresBtn", 1, { scale: 0, ease: Expo.easeOut });
+  TweenMax.from(".allScoresBtn p", 1.2, { opacity: 0, delay: 1 });
   let func;
   let contentMainBtns = document.querySelector(".contentMain");
   contentMainBtns.addEventListener(
@@ -801,8 +824,12 @@ function generateScores(testType) {
   contentTitle.innerHTML = "";
   contentMain.innerHTML = "";
   contentMain.className = "contentMain";
+  clearInterval(x);
+  isElemVisable(timer, false);
+  isElemVisable(submitBtn, false);
   let allTestScores = [];
   if (testType == 0) {
+    isElemVisable(backBtn, true);
     allTestScores = JSON.parse(localStorage.getItem("scores")) || [];
     let title = document.createElement("p");
     //title.id = "test_type";
@@ -820,6 +847,7 @@ function generateScores(testType) {
       };
     }
   } else {
+    isElemVisable(backBtn, true);
     let title = document.createElement("p");
     //title.id = "test_type";
     switch (testType) {
