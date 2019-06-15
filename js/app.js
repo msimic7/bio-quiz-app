@@ -11,6 +11,8 @@ const backBtn = document.querySelector("#backBtn");
 const allScoresBtns = document.querySelectorAll(".allScoresBtn");
 const saveBtn = document.querySelector(".saveBtn");
 const questionNum = document.querySelector(".questionNum");
+const another60Btn = document.querySelector("#another60Btn");
+const categoriesBtn = document.querySelector("#categoriesBtn");
 
 let tl = new TimelineMax();
 tl.add(TweenMax.to(homeBtns, 0.8, { opacity: 1, width: "95%" }));
@@ -47,6 +49,7 @@ let questions = [];
 let catId;
 let questionsAmount;
 let currentQuestion;
+let saveQuestion;
 
 let score = 0;
 let allArrayWrong = [];
@@ -120,7 +123,7 @@ submitBtn.addEventListener("click", function() {
   let answers = document.querySelectorAll(".answerInput");
   let lab = document.getElementsByTagName("label");
   let question = questions[currentQuestion];
-
+  saveQuestion = question;
   if (question.correctAnswers.length == 1) {
     let correctAnswerValue = question.correctAnswers[0].correctAnswer;
 
@@ -218,6 +221,17 @@ submitBtn.addEventListener("click", function() {
 
   isElemVisable(nextBtn, true);
   isElemVisable(submitBtn, false);
+  console.log(ctg1);
+  console.log(ctg2);
+  console.log(ctg3);
+  console.log(ctg4);
+  console.log(ctg5);
+  console.log(ctg6);
+  console.log(ctg7);
+  console.log(ctg8);
+  console.log(ctg9);
+  console.log(ctg10);
+  console.log(ctg11);
 
   currentQuestion++;
 });
@@ -233,6 +247,8 @@ nextBtn.addEventListener("click", function() {
     contentMain.innerHTML = "";
     contentTitle.innerHTML = "";
     isElemVisable(nextBtn, false);
+    isElemVisable(another60Btn, true);
+    isElemVisable(categoriesBtn, true);
     //anotherTestBtn.classList.remove("hide");
     //allScoresBtn.classList.remove("hide");
     //categoryButton.classList.remove("hide");
@@ -299,9 +315,9 @@ nextBtn.addEventListener("click", function() {
     console.log(testFFB2);
     console.log("====================================");
 
-    setTimeout(function() {
-      categories();
-    }, 2000);
+    // setTimeout(function() {
+    //   categories();
+    // }, 2000);
   } else {
     displayQuestion(questions[currentQuestion]);
 
@@ -311,6 +327,30 @@ nextBtn.addEventListener("click", function() {
   }
 });
 
+another60Btn.addEventListener("click", function() {
+  catId = -1;
+  //animateHomeBtnsOut(ev);
+  generateTest(catId);
+});
+
+saveBtn.addEventListener("click", function() {
+  wrQuestionArrayAdd(saveQuestion);
+  console.log(ctg1);
+  console.log(ctg2);
+  console.log(ctg3);
+  console.log(ctg4);
+  console.log(ctg5);
+  console.log(ctg6);
+  console.log(ctg7);
+  console.log(ctg8);
+  console.log(ctg9);
+  console.log(ctg10);
+  console.log(ctg11);
+});
+
+categoriesBtn.addEventListener("click", function() {
+  categories();
+});
 /* MAIN FUNCTIONS */
 
 function animateHomeBtnsOut(btnEvent) {
@@ -386,11 +426,14 @@ function myFunc(event) {
 
 function generateTest(catId) {
   showQuiz();
+  score = 0;
   contentTitle.classList.add("questionText");
   isElemVisable(backBtn, false);
   isElemVisable(submitBtn, true);
   isElemVisable(saveBtn, true);
   isElemVisable(questionNum, true);
+  isElemVisable(another60Btn, false);
+  isElemVisable(categoriesBtn, false);
   pickCategory(catId);
 
   if (catId == -1) {
@@ -410,6 +453,8 @@ function generateTest(catId) {
 
 function categories() {
   showQuiz();
+  isElemVisable(another60Btn, false);
+  isElemVisable(categoriesBtn, false);
   contentMain.classList.add("categories");
   isElemVisable(backBtn, true);
   let titleText = document.createTextNode("CATEGORIES");
