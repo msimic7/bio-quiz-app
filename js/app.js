@@ -1,21 +1,21 @@
-const leftSideContent = document.querySelector("#home");
-const content = document.querySelector(".content");
-const homeBtns = document.querySelectorAll(".homeBtn");
-const homeBtnPs = document.querySelectorAll(".leftSideContent p");
-const contentTitle = document.querySelector(".contentTitle");
-const contentMain = document.querySelector(".contentMain");
-const categoryBtns = document.querySelector(".contentMain");
-const submitBtn = document.querySelector("#submitBtn");
-const nextBtn = document.querySelector("#nextBtn");
-const backBtn = document.querySelector("#backBtn");
-const allScoresBtns = document.querySelectorAll(".allScoresBtn");
-const saveBtn = document.querySelector(".saveBtn");
-const questionNum = document.querySelector(".questionNum");
-const another60Btn = document.querySelector("#another60Btn");
-const categoriesBtn = document.querySelector("#categoriesBtn");
+const leftSideContent = document.querySelector('#home');
+const content = document.querySelector('.content');
+const homeBtns = document.querySelectorAll('.homeBtn');
+const homeBtnPs = document.querySelectorAll('.leftSideContent p');
+const contentTitle = document.querySelector('.contentTitle');
+const contentMain = document.querySelector('.contentMain');
+const categoryBtns = document.querySelector('.contentMain');
+const submitBtn = document.querySelector('#submitBtn');
+const nextBtn = document.querySelector('#nextBtn');
+const backBtn = document.querySelector('#backBtn');
+const allScoresBtns = document.querySelectorAll('.allScoresBtn');
+const saveBtn = document.querySelector('.saveBtn');
+const questionNum = document.querySelector('.questionNum');
+const another60Btn = document.querySelector('#another60Btn');
+const categoriesBtn = document.querySelector('#categoriesBtn');
 
 let tl = new TimelineMax();
-tl.add(TweenMax.to(homeBtns, 0.8, { opacity: 1, width: "95%" }));
+tl.add(TweenMax.to(homeBtns, 0.8, { opacity: 1, width: '95%' }));
 tl.add(
   TweenMax.from(content, 1, {
     opacity: 0,
@@ -25,10 +25,10 @@ tl.add(
   })
 );
 tl.add(
-  TweenMax.to(homeBtns, 0.7, { boxShadow: "0px 0px 5px 2px rgba(0,0,0,0.75)" }),
-  "-=0.5"
+  TweenMax.to(homeBtns, 0.7, { boxShadow: '0px 0px 5px 2px rgba(0,0,0,0.75)' }),
+  '-=0.5'
 );
-tl.add(TweenMax.to(homeBtnPs, 0.7, { opacity: 1 }), "-=0.3");
+tl.add(TweenMax.to(homeBtnPs, 0.7, { opacity: 1 }), '-=0.3');
 
 let tl1 = new TimelineMax();
 
@@ -43,6 +43,8 @@ let ctg8 = [];
 let ctg9 = [];
 let ctg10 = [];
 let ctg11 = [];
+let ctg12 = [];
+let ctg13 = [];
 
 let questionData;
 let questions = [];
@@ -54,37 +56,37 @@ let saveQuestion;
 let score = 0;
 let allArrayWrong = [];
 
-let timer = document.querySelector(".timer");
-let timeHours = document.querySelector(".hours");
-let timeMins = document.querySelector(".mins");
-let timeSecs = document.querySelector(".secs");
+let timer = document.querySelector('.timer');
+let timeHours = document.querySelector('.hours');
+let timeMins = document.querySelector('.mins');
+let timeSecs = document.querySelector('.secs');
 let x;
 
-let test60ScoresBtn = document.getElementById("test60_scores_btn");
-let book1ScoresBtn = document.getElementById("book1_scores_btn");
-let book2ScoresBtn = document.getElementById("book2_scores_btn");
+let test60ScoresBtn = document.getElementById('test60_scores_btn');
+let book1ScoresBtn = document.getElementById('book1_scores_btn');
+let book2ScoresBtn = document.getElementById('book2_scores_btn');
 
 /*JSON INIT*/
 
 function initApp() {
-  fetch("./data.json")
+  fetch('./data.json')
     .then(res => {
       return res.json();
     })
     .then(data => {
       if (!data) {
-        Promise.reject("No data was loaded!");
+        Promise.reject('No data was loaded!');
       }
       questionData = data;
-      console.log("====================================");
+      console.log('====================================');
       console.log(questionData);
-      console.log("====================================");
+      console.log('====================================');
       return questionData;
     })
     .catch(err => {
-      console.log("====================================");
-      console.log("Fetch failed");
-      console.log("====================================");
+      console.log('====================================');
+      console.log('Fetch failed');
+      console.log('====================================');
     });
 }
 
@@ -92,11 +94,11 @@ initApp();
 
 /* EVENTS */
 
-leftSideContent.addEventListener("click", function() {
+leftSideContent.addEventListener('click', function() {
   myFunc(event);
 });
 
-backBtn.addEventListener("click", function() {
+backBtn.addEventListener('click', function() {
   /* let tl2 = new TimelineMax();
   tl2.add(TweenMax.to(".content", 0.3, { opacity: 0 }));
   setTimeout(function() {
@@ -119,9 +121,9 @@ backBtn.addEventListener("click", function() {
   location.reload();
 });
 
-submitBtn.addEventListener("click", function() {
-  let answers = document.querySelectorAll(".answerInput");
-  let lab = document.getElementsByTagName("label");
+submitBtn.addEventListener('click', function() {
+  let answers = document.querySelectorAll('.answerInput');
+  let lab = document.getElementsByTagName('label');
   let question = questions[currentQuestion];
   saveQuestion = question;
   if (question.correctAnswers.length == 1) {
@@ -132,21 +134,21 @@ submitBtn.addEventListener("click", function() {
 
       if (answer.checked) {
         if (answer.value == correctAnswerValue) {
-          lab[i].classList.add("correct");
+          lab[i].classList.add('correct');
           score++;
         } else {
-          lab[i].classList.add("incorrect");
+          lab[i].classList.add('incorrect');
           wrQuestionArrayAdd(question);
         }
       } else if (answer.value == correctAnswerValue) {
-        lab[i].classList.add("correctDark");
+        lab[i].classList.add('correctDark');
       }
     }
     for (let i = 0; i < answers.length; i++) {
       let answer = answers[i];
 
       //lab[i].classList.add("no-before");
-      lab[i].classList.remove("before");
+      lab[i].classList.remove('before');
       answer.disabled = true;
     }
   } else {
@@ -162,9 +164,9 @@ submitBtn.addEventListener("click", function() {
         if (answer.checked) {
           for (let j = 0; j < question.correctAnswers.length; j++) {
             if (answer.value == question.correctAnswers[j].correctAnswer) {
-              lab[i].classList.add("correct");
+              lab[i].classList.add('correct');
             } else {
-              lab[i].classList.add("incorrect");
+              lab[i].classList.add('incorrect');
             }
           }
         }
@@ -174,7 +176,7 @@ submitBtn.addEventListener("click", function() {
         if (!answer.checked) {
           for (let j = 0; j < question.correctAnswers.length; j++) {
             if (answer.value == question.correctAnswers[j].correctAnswer) {
-              lab[i].classList.add("correctDark");
+              lab[i].classList.add('correctDark');
               break;
             }
           }
@@ -187,10 +189,10 @@ submitBtn.addEventListener("click", function() {
         if (answer.checked) {
           for (let j = 0; j < question.correctAnswers.length; j++) {
             if (answer.value == question.correctAnswers[j].correctAnswer) {
-              lab[i].classList.add("correct");
+              lab[i].classList.add('correct');
               checkedCountCorrect += 1;
             } else {
-              lab[i].classList.add("incorrect");
+              lab[i].classList.add('incorrect');
             }
           }
         }
@@ -204,7 +206,7 @@ submitBtn.addEventListener("click", function() {
         let answer = answers[i];
         for (let j = 0; j < question.correctAnswers.length; j++) {
           if (answer.value == question.correctAnswers[j].correctAnswer) {
-            lab[i].classList.add("correctDark");
+            lab[i].classList.add('correctDark');
             break;
           }
         }
@@ -213,8 +215,8 @@ submitBtn.addEventListener("click", function() {
     for (let i = 0; i < answers.length; i++) {
       let answer = answers[i];
 
-      lab[i].classList.add("no-before");
-      lab[i].classList.remove("before");
+      lab[i].classList.add('no-before');
+      lab[i].classList.remove('before');
       answer.disabled = true;
     }
   }
@@ -232,20 +234,22 @@ submitBtn.addEventListener("click", function() {
   console.log(ctg9);
   console.log(ctg10);
   console.log(ctg11);
+  console.log(ctg12);
+  console.log(ctg13);
 
   currentQuestion++;
 });
 
-nextBtn.addEventListener("click", function() {
+nextBtn.addEventListener('click', function() {
   if (currentQuestion == questions.length) {
     isElemVisable(saveBtn, false);
     isElemVisable(questionNum, false);
     clearInterval(x);
     isElemVisable(timer, false);
-    contentMain.className = "contentMain scores";
+    contentMain.className = 'contentMain scores';
 
-    contentMain.innerHTML = "";
-    contentTitle.innerHTML = "";
+    contentMain.innerHTML = '';
+    contentTitle.innerHTML = '';
     isElemVisable(nextBtn, false);
     isElemVisable(another60Btn, true);
     isElemVisable(categoriesBtn, true);
@@ -253,7 +257,7 @@ nextBtn.addEventListener("click", function() {
     //allScoresBtn.classList.remove("hide");
     //categoryButton.classList.remove("hide");
 
-    let scoreTxt = "YOUR SCORE IS " + score + "/" + questions.length;
+    let scoreTxt = 'YOUR SCORE IS ' + score + '/' + questions.length;
     let scoreT = document.createTextNode(scoreTxt);
 
     contentTitle.appendChild(scoreT);
@@ -273,8 +277,8 @@ nextBtn.addEventListener("click", function() {
           wqArray: wrQ.sort()
         });
 
-        let wrQuestionDiv = document.createElement("div");
-        let wrQTxt = document.createTextNode(allArrayWrong[i].cat + ": " + wrQ);
+        let wrQuestionDiv = document.createElement('div');
+        let wrQTxt = document.createTextNode(allArrayWrong[i].cat + ': ' + wrQ);
 
         wrQuestionDiv.appendChild(wrQTxt);
 
@@ -282,9 +286,10 @@ nextBtn.addEventListener("click", function() {
       }
     }
 
-    scoresTest60 = JSON.parse(localStorage.getItem("scores")) || [];
-    scoresBook1 = JSON.parse(localStorage.getItem("scoresBook1")) || [];
-    scoresBook2 = JSON.parse(localStorage.getItem("scoresBook2")) || [];
+    scoresTest60 = JSON.parse(localStorage.getItem('scores')) || [];
+    scoresBook1 = JSON.parse(localStorage.getItem('scoresBook1')) || [];
+    scoresBook2 = JSON.parse(localStorage.getItem('scoresBook2')) || [];
+    scoresBook3 = JSON.parse(localStorage.getItem('scoresBook3')) || [];
 
     let todaysDate = getCurrentDate();
     let percent = Math.round((score / questions.length) * 100);
@@ -296,24 +301,28 @@ nextBtn.addEventListener("click", function() {
         return a - b;
       });
     }
-    console.log("======CATEGORY ID========");
+    console.log('======CATEGORY ID========');
     console.log(catId);
-    console.log("====================================");
+    console.log('====================================');
 
     testFBook(todaysDate, wrQLS, percent, catId);
 
-    testFF = JSON.parse(localStorage.getItem("scores")) || [];
-    console.log("==========NEW TEST FF==========");
+    testFF = JSON.parse(localStorage.getItem('scores')) || [];
+    console.log('==========NEW TEST FF==========');
     console.log(testFF);
-    console.log("====================================");
-    testFFB = JSON.parse(localStorage.getItem("scoresBook1")) || [];
-    console.log("==========NEW BOOK1 FF==========");
+    console.log('====================================');
+    testFFB = JSON.parse(localStorage.getItem('scoresBook1')) || [];
+    console.log('==========NEW BOOK1 FF==========');
     console.log(testFFB);
-    console.log("====================================");
-    testFFB2 = JSON.parse(localStorage.getItem("scoresBook2")) || [];
-    console.log("==========NEW BOOK2 FF==========");
+    console.log('====================================');
+    testFFB2 = JSON.parse(localStorage.getItem('scoresBook2')) || [];
+    console.log('==========NEW BOOK2 FF==========');
     console.log(testFFB2);
-    console.log("====================================");
+    console.log('====================================');
+    testFFB3 = JSON.parse(localStorage.getItem('scoresBook3')) || [];
+    console.log('==========NEW BOOK3 FF==========');
+    console.log(testFFB3);
+    console.log('====================================');
 
     // setTimeout(function() {
     //   categories();
@@ -321,19 +330,19 @@ nextBtn.addEventListener("click", function() {
   } else {
     displayQuestion(questions[currentQuestion]);
 
-    submitBtn.classList.remove("hide");
+    submitBtn.classList.remove('hide');
 
-    nextBtn.classList.add("hide");
+    nextBtn.classList.add('hide');
   }
 });
 
-another60Btn.addEventListener("click", function() {
+another60Btn.addEventListener('click', function() {
   catId = -1;
   //animateHomeBtnsOut(ev);
   generateTest(catId);
 });
 
-saveBtn.addEventListener("click", function() {
+saveBtn.addEventListener('click', function() {
   wrQuestionArrayAdd(saveQuestion);
   console.log(ctg1);
   console.log(ctg2);
@@ -346,26 +355,28 @@ saveBtn.addEventListener("click", function() {
   console.log(ctg9);
   console.log(ctg10);
   console.log(ctg11);
+  console.log(ctg12);
+  console.log(ctg13);
 });
 
-categoriesBtn.addEventListener("click", function() {
+categoriesBtn.addEventListener('click', function() {
   categories();
 });
 /* MAIN FUNCTIONS */
 
 function animateHomeBtnsOut(btnEvent) {
-  console.log("INSIDE ANIM OUT" + btnEvent);
+  console.log('INSIDE ANIM OUT' + btnEvent);
   let tl11 = new TimelineMax();
   tl11.pause();
   tl11.add(TweenMax.to(btnEvent, 0.4, { xPercent: 115, opacity: 0 }));
-  tl11.add(TweenMax.to(homeBtns, 0.4, { opacity: 0 }), "-=0.3");
+  tl11.add(TweenMax.to(homeBtns, 0.4, { opacity: 0 }), '-=0.3');
   tl11.add(
     TweenMax.to(btnEvent, 0.4, {
       xPercent: 0,
       opacity: 0
     })
   );
-  tl11.add(TweenMax.to(homeBtnPs, 0.7, { opacity: 0 }), "-=0.3");
+  tl11.add(TweenMax.to(homeBtnPs, 0.7, { opacity: 0 }), '-=0.3');
   tl11.addCallback(function() {
     homeBtns.forEach(el => {
       isElemVisable(el, false);
@@ -385,40 +396,45 @@ function myFunc(event) {
 
   if (button != undefined) {
     switch (button) {
-      case "test60":
+      case 'test60':
         catId = -1;
         animateHomeBtnsOut(ev);
         generateTest(catId);
         break;
-      case "cat":
+      case 'cat':
         animateHomeBtnsOut(ev);
         categories();
         break;
-      case "allSc":
+      case 'allSc':
         animateHomeBtnsOut(ev);
         generateAllScores();
         break;
-      case "allQw":
+      case 'allQw':
         animateHomeBtnsOut(ev);
         catId = -1;
         pickCategory(catId);
         resetValidQuestions(questions);
         let newWr = [];
-        localStorage.setItem("scores", JSON.stringify(newWr));
-        localStorage.setItem("scoresBook1", JSON.stringify(newWr));
-        localStorage.setItem("scoresBook2", JSON.stringify(newWr));
-        testFF = JSON.parse(localStorage.getItem("scores")) || [];
-        console.log("==========NEW TEST FF==========");
+        localStorage.setItem('scores', JSON.stringify(newWr));
+        localStorage.setItem('scoresBook1', JSON.stringify(newWr));
+        localStorage.setItem('scoresBook2', JSON.stringify(newWr));
+        localStorage.setItem('scoresBook3', JSON.stringify(newWr));
+        testFF = JSON.parse(localStorage.getItem('scores')) || [];
+        console.log('==========NEW TEST FF==========');
         console.log(testFF);
-        console.log("====================================");
-        testFFB = JSON.parse(localStorage.getItem("scoresBook1")) || [];
-        console.log("==========NEW BOOK1 FF==========");
+        console.log('====================================');
+        testFFB = JSON.parse(localStorage.getItem('scoresBook1')) || [];
+        console.log('==========NEW BOOK1 FF==========');
         console.log(testFFB);
-        console.log("====================================");
-        testFFB2 = JSON.parse(localStorage.getItem("scoresBook2")) || [];
-        console.log("==========NEW BOOK2 FF==========");
+        console.log('====================================');
+        testFFB2 = JSON.parse(localStorage.getItem('scoresBook2')) || [];
+        console.log('==========NEW BOOK2 FF==========');
         console.log(testFFB2);
-        console.log("====================================");
+        console.log('====================================');
+        testFFB3 = JSON.parse(localStorage.getItem('scoresBook3')) || [];
+        console.log('==========NEW BOOK2 FF==========');
+        console.log(testFFB3);
+        console.log('====================================');
         break;
     }
   }
@@ -427,7 +443,7 @@ function myFunc(event) {
 function generateTest(catId) {
   showQuiz();
   score = 0;
-  contentTitle.classList.add("questionText");
+  contentTitle.classList.add('questionText');
   isElemVisable(backBtn, false);
   isElemVisable(submitBtn, true);
   isElemVisable(saveBtn, true);
@@ -446,6 +462,8 @@ function generateTest(catId) {
 
   if (catId == 0) {
     setTimer(questions.length * 1);
+  } else if (catId == 11) {
+    setTimer(questions.length * 0.75);
   } else {
     setTimer(questions.length * 1.5);
   }
@@ -455,34 +473,34 @@ function categories() {
   showQuiz();
   isElemVisable(another60Btn, false);
   isElemVisable(categoriesBtn, false);
-  contentMain.classList.add("categories");
+  contentMain.classList.add('categories');
   isElemVisable(backBtn, true);
-  let titleText = document.createTextNode("CATEGORIES");
+  let titleText = document.createTextNode('CATEGORIES');
   contentTitle.appendChild(titleText);
-  contentTitle.classList.add("titleText");
+  contentTitle.classList.add('titleText');
   let i = 0;
   questionData.forEach(category => {
-    let categoryDiv = document.createElement("div");
+    let categoryDiv = document.createElement('div');
     let categoryName = document.createTextNode(category.catID);
-    let categoryP = document.createElement("p");
+    let categoryP = document.createElement('p');
     categoryP.appendChild(categoryName);
     categoryDiv.appendChild(categoryP);
-    categoryDiv.className = "btn category";
+    categoryDiv.className = 'btn category';
     categoryDiv.dataset.id = i.toString();
     contentMain.appendChild(categoryDiv);
     i++;
   });
-  TweenMax.from(".category", 1, { scale: 0, ease: Expo.easeOut });
-  TweenMax.from(".category p", 1.2, { opacity: 0, delay: 1 });
+  TweenMax.from('.category', 1, { scale: 0, ease: Expo.easeOut });
+  TweenMax.from('.category p', 1.2, { opacity: 0, delay: 1 });
   //TweenMax.from(".category", 5, { opacity: 0 });
   let func;
   categoryBtns.addEventListener(
-    "click",
+    'click',
     (func = function() {
       catId = getCategoryBtnId(event);
       if (catId != -1) {
         generateTest(catId);
-        categoryBtns.removeEventListener("click", func);
+        categoryBtns.removeEventListener('click', func);
       }
     })
   );
@@ -490,10 +508,10 @@ function categories() {
 
 function prepareQuestions(questions) {
   /*PULL VALID QUESTION IDS ARRAY FROM LS*/
-  let validQuestions = JSON.parse(localStorage.getItem("validQuestions"));
-  console.log("VALID QUESTIONS FROM LS");
+  let validQuestions = JSON.parse(localStorage.getItem('validQuestions'));
+  console.log('VALID QUESTIONS FROM LS');
   console.log(validQuestions);
-  console.log("====================================");
+  console.log('====================================');
 
   let vQAmount = validQuestions.length;
   /*PULL 60 NEW IDS*/
@@ -512,36 +530,36 @@ function prepareQuestions(questions) {
 
   /*REDUCE VALID QUESTIONS ARRAY AND SAVE TO LS*/
 
-  localStorage.setItem("validQuestions", JSON.stringify(validQuestions));
-  console.log("NEW VALID QUESTIONS TO LS");
+  localStorage.setItem('validQuestions', JSON.stringify(validQuestions));
+  console.log('NEW VALID QUESTIONS TO LS');
   console.log(validQuestions);
-  console.log("====================================");
+  console.log('====================================');
 
   /*PULL 60 RANDOM QUESTIONS*/
   let random60Questions = [];
   for (let i = 0; i < array60.length; i++) {
     random60Questions.push(questions[array60[i] - 1]);
   }
-  console.log("NEW 60 QUESTIONS");
+  console.log('NEW 60 QUESTIONS');
   console.log(random60Questions);
-  console.log("====================================");
+  console.log('====================================');
 
   return random60Questions;
 }
 
 function displayQuestion(question) {
-  contentMain.innerHTML = "";
-  contentTitle.innerHTML = "";
+  contentMain.innerHTML = '';
+  contentTitle.innerHTML = '';
 
   let currQuest = currentQuestion + 1;
-  questionNum.innerHTML = currQuest + ".";
+  questionNum.innerHTML = currQuest + '.';
   //saveCurrentQuestion = question;
 
-  let questionNumb = currQuest.toString() + ".";
+  let questionNumb = currQuest.toString() + '.';
   let questionNumber = document.createTextNode(questionNumb);
-  console.log("====QUESTION NUMBER====");
+  console.log('====QUESTION NUMBER====');
   console.log(questionNumber);
-  console.log("====================================");
+  console.log('====================================');
   //questionNum.appendChild(questionNumber);
 
   let questionQText = document.createTextNode(question.question);
@@ -550,20 +568,20 @@ function displayQuestion(question) {
   let ansNum = 1;
   if (question.correctAnswers.length == 1) {
     question.answers.forEach(answer => {
-      let answerDiv = document.createElement("div");
-      answerDiv.classList.add("answer");
-      let radioId = "radio" + ansNum;
-      let label = document.createElement("label");
-      label.setAttribute("for", radioId);
-      label.classList.add("before");
+      let answerDiv = document.createElement('div');
+      answerDiv.classList.add('answer');
+      let radioId = 'radio' + ansNum;
+      let label = document.createElement('label');
+      label.setAttribute('for', radioId);
+      label.classList.add('before');
 
-      let answerInput = document.createElement("input");
+      let answerInput = document.createElement('input');
 
-      answerInput.setAttribute("id", radioId);
-      answerInput.setAttribute("type", "radio");
-      answerInput.setAttribute("name", "radio");
-      answerInput.setAttribute("value", answer.answerID);
-      answerInput.classList.add("answerInput");
+      answerInput.setAttribute('id', radioId);
+      answerInput.setAttribute('type', 'radio');
+      answerInput.setAttribute('name', 'radio');
+      answerInput.setAttribute('value', answer.answerID);
+      answerInput.classList.add('answerInput');
 
       let answerText = document.createTextNode(answer.answer);
       //answerP.appendChild(answerText);
@@ -577,20 +595,20 @@ function displayQuestion(question) {
     });
   } else {
     question.answers.forEach(answer => {
-      let answerDiv = document.createElement("div");
-      answerDiv.classList.add("answer");
-      let chkboxId = "chkbox" + ansNum;
-      let label = document.createElement("label");
-      label.setAttribute("for", chkboxId);
+      let answerDiv = document.createElement('div');
+      answerDiv.classList.add('answer');
+      let chkboxId = 'chkbox' + ansNum;
+      let label = document.createElement('label');
+      label.setAttribute('for', chkboxId);
       //label.classList.add("before");
 
-      let answerInput = document.createElement("input");
+      let answerInput = document.createElement('input');
 
-      answerInput.setAttribute("id", chkboxId);
-      answerInput.setAttribute("type", "checkbox");
-      answerInput.setAttribute("name", "checkbox");
-      answerInput.setAttribute("value", answer.answerID);
-      answerInput.classList.add("answerInput");
+      answerInput.setAttribute('id', chkboxId);
+      answerInput.setAttribute('type', 'checkbox');
+      answerInput.setAttribute('name', 'checkbox');
+      answerInput.setAttribute('value', answer.answerID);
+      answerInput.classList.add('answerInput');
 
       let answerText = document.createTextNode(answer.answer);
       //answerP.appendChild(answerText);
@@ -699,8 +717,10 @@ function testFBook(date, scores, percent, catId) {
   } else {
     if (catId > -1 && catId < 6) {
       scoresBook = scoresBook1;
-    } else {
+    } else if (catId > 5 && catId < 11) {
       scoresBook = scoresBook2;
+    } else {
+      scoresBook = scoresBook3;
     }
 
     if (scoresBook.length === 0) {
@@ -724,8 +744,10 @@ function testFBook(date, scores, percent, catId) {
 
       if (catId > -1 && catId < 6) {
         scoresBook1.push(newDate);
-      } else {
+      } else if (catId > 5 && catId < 11) {
         scoresBook2.push(newDate);
+      } else {
+        scoresBook3.push(newDate);
       }
     } else {
       for (let i = 0; i < scoresBook.length; i++) {
@@ -792,9 +814,12 @@ function testFBook(date, scores, percent, catId) {
           if (catId > -1 && catId < 6) {
             scoresBook1[i].overallPercent = overallPercent;
             scoresBook1[i].allScores == allScores;
-          } else {
+          } else if (catId > 5 && catId < 11) {
             scoresBook2[i].overallPercent = overallPercent;
             scoresBook2[i].allScores == allScores;
+          } else {
+            scoresBook3[i].overallPercent = overallPercent;
+            scoresBook3[i].allScores == allScores;
           }
         }
       }
@@ -826,93 +851,100 @@ function testFBook(date, scores, percent, catId) {
 
         if (catId > -1 && catId < 6) {
           scoresBook1.push(newDate);
-        } else {
+        } else if (catId > 5 && catId < 11) {
           scoresBook2.push(newDate);
+        } else {
+          scoresBook3.push(newDate);
         }
       }
     }
   }
 
-  localStorage.setItem("scores", JSON.stringify(scoresTest60));
-  localStorage.setItem("scoresBook1", JSON.stringify(scoresBook1));
-  localStorage.setItem("scoresBook2", JSON.stringify(scoresBook2));
+  localStorage.setItem('scores', JSON.stringify(scoresTest60));
+  localStorage.setItem('scoresBook1', JSON.stringify(scoresBook1));
+  localStorage.setItem('scoresBook2', JSON.stringify(scoresBook2));
+  localStorage.setItem('scoresBook3', JSON.stringify(scoresBook3));
 }
 
 function generateAllScores() {
-  contentTitle.innerHTML = "";
-  contentMain.innerHTML = "";
-  contentMain.className = "contentMain allScores";
+  contentTitle.innerHTML = '';
+  contentMain.innerHTML = '';
+  contentMain.className = 'contentMain allScores';
   isElemVisable(backBtn, true);
 
-  let testNames = ["TEST 60", "BOOK1", "BOOK2", "BOOK 3"];
+  let testNames = ['TEST 60', 'BOOK1', 'BOOK2', 'BOOK 3'];
   for (let i = 0; i < testNames.length; i++) {
-    let div = document.createElement("div");
-    div.className = "btn allScoresBtn";
+    let div = document.createElement('div');
+    div.className = 'btn allScoresBtn';
     div.dataset.id = i.toString();
     let divText = document.createTextNode(testNames[i]);
-    let divP = document.createElement("p");
+    let divP = document.createElement('p');
     divP.appendChild(divText);
     div.appendChild(divP);
     contentMain.appendChild(div);
   }
-  let titleText = document.createTextNode("ALL SCORES");
+  let titleText = document.createTextNode('ALL SCORES');
   contentTitle.appendChild(titleText);
-  contentTitle.classList.add("titleText");
-  TweenMax.from(".allScoresBtn", 1, { scale: 0, ease: Expo.easeOut });
-  TweenMax.from(".allScoresBtn p", 1.2, { opacity: 0, delay: 1 });
+  contentTitle.classList.add('titleText');
+  TweenMax.from('.allScoresBtn', 1, { scale: 0, ease: Expo.easeOut });
+  TweenMax.from('.allScoresBtn p', 1.2, { opacity: 0, delay: 1 });
   let func;
-  let contentMainBtns = document.querySelector(".contentMain");
+  let contentMainBtns = document.querySelector('.contentMain');
   contentMainBtns.addEventListener(
-    "click",
+    'click',
     (func = function() {
       let testType = getCategoryBtnId(event);
       if (testType != undefined && !Number.isNaN(testType)) {
         generateScores(testType);
-        contentMainBtns.removeEventListener("click", func);
+        contentMainBtns.removeEventListener('click', func);
       }
     })
   );
 }
 
 function generateScores(testType) {
-  contentTitle.innerHTML = "";
-  contentMain.innerHTML = "";
-  contentMain.className = "contentMain";
+  contentTitle.innerHTML = '';
+  contentMain.innerHTML = '';
+  contentMain.className = 'contentMain';
   clearInterval(x);
   isElemVisable(timer, false);
   isElemVisable(submitBtn, false);
   let allTestScores = [];
   if (testType == 0) {
     isElemVisable(backBtn, true);
-    allTestScores = JSON.parse(localStorage.getItem("scores")) || [];
-    let title = document.createElement("p");
+    allTestScores = JSON.parse(localStorage.getItem('scores')) || [];
+    let title = document.createElement('p');
     //title.id = "test_type";
-    title.innerHTML = "TEST 60";
+    title.innerHTML = 'TEST 60';
     contentTitle.appendChild(title);
 
     for (let i = 0; i < allTestScores.length; i++) {
       generateScoresT60(allTestScores[i], i);
     }
-    let buttons = document.getElementsByClassName("see_more");
+    let buttons = document.getElementsByClassName('see_more');
     let buttonsCount = buttons.length;
     for (let i = 0; i < buttonsCount; i++) {
       buttons[i].onclick = function() {
-        contentMain.style.overflowY = "scroll";
+        contentMain.style.overflowY = 'scroll';
         generateScoresT60More(allTestScores[this.value].allScores);
       };
     }
   } else {
     isElemVisable(backBtn, true);
-    let title = document.createElement("p");
+    let title = document.createElement('p');
     //title.id = "test_type";
     switch (testType) {
       case 1:
-        allTestScores = JSON.parse(localStorage.getItem("scoresBook1")) || [];
-        title.innerHTML = "BOOK 1";
+        allTestScores = JSON.parse(localStorage.getItem('scoresBook1')) || [];
+        title.innerHTML = 'BOOK 1';
         break;
       case 2:
-        allTestScores = JSON.parse(localStorage.getItem("scoresBook2")) || [];
-        title.innerHTML = "BOOK 2";
+        allTestScores = JSON.parse(localStorage.getItem('scoresBook2')) || [];
+        title.innerHTML = 'BOOK 2';
+        break;
+      case 3:
+        allTestScores = JSON.parse(localStorage.getItem('scoresBook3')) || [];
+        title.innerHTML = 'BOOK 3';
         break;
     }
 
@@ -921,7 +953,7 @@ function generateScores(testType) {
     for (let i = 0; i < allTestScores.length; i++) {
       generateScoresT60(allTestScores[i], i);
     }
-    let buttons = document.getElementsByClassName("see_more");
+    let buttons = document.getElementsByClassName('see_more');
     let buttonsCount = buttons.length;
     for (let i = 0; i < buttonsCount; i++) {
       buttons[i].onclick = function() {
@@ -932,47 +964,47 @@ function generateScores(testType) {
 }
 
 function generateScoresT60(score, val) {
-  let item = document.createElement("div");
-  item.classList.add("w100");
+  let item = document.createElement('div');
+  item.classList.add('w100');
 
-  let det = document.createElement("details");
-  let sum = document.createElement("summary");
+  let det = document.createElement('details');
+  let sum = document.createElement('summary');
 
-  let date = document.createElement("div");
-  date.classList.add("date");
+  let date = document.createElement('div');
+  date.classList.add('date');
   date.innerHTML = score.date;
 
-  let percent_div = document.createElement("div");
-  percent_div.classList.add("percent_div");
-  percent_div.style.width = 40 + "%";
+  let percent_div = document.createElement('div');
+  percent_div.classList.add('percent_div');
+  percent_div.style.width = 40 + '%';
 
-  let percent = document.createElement("div");
-  percent.classList.add("percent");
-  let p = score.overallPercent + "%";
+  let percent = document.createElement('div');
+  percent.classList.add('percent');
+  let p = score.overallPercent + '%';
   if (score.overallPercent != 0) {
     if (score.overallPercent < 80) {
-      percent.style.background = "red";
+      percent.style.background = 'red';
     }
     if (score.overallPercent > 79 && score.overallPercent < 91) {
-      percent.style.background = "orange";
+      percent.style.background = 'orange';
     }
     if (score.overallPercent > 89 && score.overallPercent < 95) {
-      percent.style.background = "green";
+      percent.style.background = 'green';
     }
     if (score.overallPercent > 94 && score.overallPercent <= 100) {
-      percent.style.background = "purple";
+      percent.style.background = 'purple';
     }
   }
   percent.innerHTML = p;
   percent.style.width = p;
   percent_div.appendChild(percent);
 
-  let btn = document.createElement("button");
-  btn.classList.add("see_more");
-  btn.setAttribute("id", "see_more_btn");
-  let b = "=>";
+  let btn = document.createElement('button');
+  btn.classList.add('see_more');
+  btn.setAttribute('id', 'see_more_btn');
+  let b = '=>';
   btn.innerHTML = b;
-  btn.setAttribute("value", val);
+  btn.setAttribute('value', val);
 
   sum.appendChild(date);
   sum.appendChild(percent_div);
@@ -984,60 +1016,60 @@ function generateScoresT60(score, val) {
 }
 
 function generateScoresT60More(allScores) {
-  contentMain.innerHTML = "";
-  backBtn.classList.remove("hide");
+  contentMain.innerHTML = '';
+  backBtn.classList.remove('hide');
   for (let i = 0; i < allScores.length; i++) {
-    let item = document.createElement("div");
-    item.classList.add("w100");
+    let item = document.createElement('div');
+    item.classList.add('w100');
 
-    let det = document.createElement("details");
-    let sum = document.createElement("summary");
+    let det = document.createElement('details');
+    let sum = document.createElement('summary');
 
-    let percent_div = document.createElement("div");
-    percent_div.classList.add("percent_div");
-    percent_div.style.width = "30%";
+    let percent_div = document.createElement('div');
+    percent_div.classList.add('percent_div');
+    percent_div.style.width = '30%';
 
-    let percent = document.createElement("div");
-    percent.classList.add("percent");
+    let percent = document.createElement('div');
+    percent.classList.add('percent');
     let p = allScores[i].percent;
     if (p != 0) {
       if (p < 80) {
-        percent.style.background = "red";
+        percent.style.background = 'red';
       }
       if (p > 79 && p < 91) {
-        percent.style.background = "orange";
+        percent.style.background = 'orange';
       }
       if (p > 89 && p < 95) {
-        percent.style.background = "green";
+        percent.style.background = 'green';
       }
       if (p > 94 && p <= 100) {
-        percent.style.background = "purple";
+        percent.style.background = 'purple';
       }
     }
-    percent.innerHTML = p + "%";
-    percent.style.width = p + "%";
+    percent.innerHTML = p + '%';
+    percent.style.width = p + '%';
     percent_div.appendChild(percent);
 
-    let wQMost = document.createElement("div");
-    wQMost.style.width = "70%";
-    wQMost.style.paddingLeft = "10px";
+    let wQMost = document.createElement('div');
+    wQMost.style.width = '70%';
+    wQMost.style.paddingLeft = '10px';
     wQMost.innerHTML =
       allScores[i].scores[allScores[i].wQMost].cat +
-      ": " +
+      ': ' +
       allScores[i].scores[allScores[i].wQMost].wqArray.length;
 
     sum.appendChild(percent_div);
     sum.appendChild(wQMost);
 
-    let ul = document.createElement("ul");
+    let ul = document.createElement('ul');
 
     for (let j = 0; j < allScores[i].scores.length; j++) {
-      let li = document.createElement("li");
-      let liDiv = document.createElement("div");
-      liDiv.classList.add("small_txt");
+      let li = document.createElement('li');
+      let liDiv = document.createElement('div');
+      liDiv.classList.add('small_txt');
       liDiv.innerHTML =
         allScores[i].scores[j].cat +
-        ": " +
+        ': ' +
         allScores[i].scores[j].wqArray.toString();
       li.appendChild(liDiv);
       ul.appendChild(li);
@@ -1051,86 +1083,86 @@ function generateScoresT60More(allScores) {
 }
 
 function generateScoresB1More(allScores, val) {
-  contentMain.innerHTML = "";
-  backBtn.classList.remove("hide");
+  contentMain.innerHTML = '';
+  backBtn.classList.remove('hide');
   for (let i = 0; i < allScores.length; i++) {
-    let item = document.createElement("div");
-    item.classList.add("w100");
+    let item = document.createElement('div');
+    item.classList.add('w100');
 
-    let det = document.createElement("details");
-    let sum = document.createElement("summary");
+    let det = document.createElement('details');
+    let sum = document.createElement('summary');
 
-    let percent_div = document.createElement("div");
-    percent_div.classList.add("percent_div");
-    percent_div.style.width = "10%";
+    let percent_div = document.createElement('div');
+    percent_div.classList.add('percent_div');
+    percent_div.style.width = '10%';
 
-    let percent = document.createElement("div");
-    percent.classList.add("percent");
+    let percent = document.createElement('div');
+    percent.classList.add('percent');
     let p = allScores[i].catPercent;
     if (p != 0) {
       if (p < 80) {
-        percent.style.background = "red";
+        percent.style.background = 'red';
       }
       if (p > 79 && p < 91) {
-        percent.style.background = "orange";
+        percent.style.background = 'orange';
       }
       if (p > 89 && p < 95) {
-        percent.style.background = "green";
+        percent.style.background = 'green';
       }
       if (p > 94 && p <= 100) {
-        percent.style.background = "purple";
+        percent.style.background = 'purple';
       }
     }
-    percent.innerHTML = p + "%";
-    percent.style.width = p + "%";
+    percent.innerHTML = p + '%';
+    percent.style.width = p + '%';
     percent_div.appendChild(percent);
 
-    let wQRepeated = document.createElement("div");
-    wQRepeated.style.width = "35%";
-    wQRepeated.style.paddingLeft = "10px";
+    let wQRepeated = document.createElement('div');
+    wQRepeated.style.width = '35%';
+    wQRepeated.style.paddingLeft = '10px';
     let repeated;
     if (allScores[i].wQRepeated.length < 1) {
-      repeated = "No repeated :)";
+      repeated = 'No repeated :)';
     } else {
-      repeated = "[" + allScores[i].wQRepeated.toString() + "]";
+      repeated = '[' + allScores[i].wQRepeated.toString() + ']';
     }
     wQRepeated.innerHTML = repeated;
 
-    let catName = document.createElement("div");
-    catName.style.width = "50%";
-    catName.style.paddingLeft = "10px";
+    let catName = document.createElement('div');
+    catName.style.width = '50%';
+    catName.style.paddingLeft = '10px';
     catName.innerHTML = getCatName(allScores[i].cat);
 
-    let ul = document.createElement("ul");
+    let ul = document.createElement('ul');
     for (let j = 0; j < allScores[i].scores.length; j++) {
-      let li = document.createElement("li");
-      let liDiv = document.createElement("div");
-      liDiv.classList.add("small_txt_2");
-      let scoresDiv = document.createElement("div");
-      let percentDiv = document.createElement("div");
-      percentDiv.classList.add("testStyle");
-      let percent = document.createElement("div");
-      percent.classList.add("percent");
+      let li = document.createElement('li');
+      let liDiv = document.createElement('div');
+      liDiv.classList.add('small_txt_2');
+      let scoresDiv = document.createElement('div');
+      let percentDiv = document.createElement('div');
+      percentDiv.classList.add('testStyle');
+      let percent = document.createElement('div');
+      percent.classList.add('percent');
       let p = allScores[i].scores[j].percent;
       if (p != 0) {
         if (p < 80) {
-          percent.style.background = "red";
+          percent.style.background = 'red';
         }
         if (p > 79 && p < 91) {
-          percent.style.background = "orange";
+          percent.style.background = 'orange';
         }
         if (p > 89 && p < 95) {
-          percent.style.background = "green";
+          percent.style.background = 'green';
         }
         if (p > 94 && p <= 100) {
-          percent.style.background = "purple";
+          percent.style.background = 'purple';
         }
       }
-      percent.innerHTML = p + "%";
-      percent.style.width = p + "%";
+      percent.innerHTML = p + '%';
+      percent.style.width = p + '%';
       percentDiv.appendChild(percent);
-      percentDiv.style.width = "30%";
-      scoresDiv.style.width = "60%";
+      percentDiv.style.width = '30%';
+      scoresDiv.style.width = '60%';
       scoresDiv.innerHTML = allScores[i].scores[j].wqArray.toString();
 
       liDiv.appendChild(percentDiv);
@@ -1161,10 +1193,10 @@ function generateScoresB1More(allScores, val) {
 /*UTILITY FUNCTIONS*/
 
 function showQuiz() {
-  contentTitle.className = "contentTitle";
-  contentTitle.innerHTML = "";
-  contentMain.className = "contentMain answers";
-  contentMain.innerHTML = "";
+  contentTitle.className = 'contentTitle';
+  contentTitle.innerHTML = '';
+  contentMain.className = 'contentMain answers';
+  contentMain.innerHTML = '';
 }
 
 function strcmp(a, b) {
@@ -1177,37 +1209,43 @@ function getCatName(catId) {
   let catName;
   switch (catId) {
     case 0:
-      catName = "Celije";
+      catName = 'Celije';
       break;
     case 1:
-      catName = "Virusi i bakterije";
+      catName = 'Virusi i bakterije';
       break;
     case 2:
-      catName = "Ekologija zavrsni test";
+      catName = 'Ekologija zavrsni test';
       break;
     case 3:
-      catName = "Zavrsni test citologija";
+      catName = 'Zavrsni test citologija';
       break;
     case 4:
-      catName = "Citologija zavrsni test";
+      catName = 'Citologija zavrsni test';
       break;
     case 5:
-      catName = "Biljna tkiva i organi";
+      catName = 'Biljna tkiva i organi';
       break;
     case 6:
-      catName = "Beskicmenjaci";
+      catName = 'Beskicmenjaci';
       break;
     case 7:
-      catName = "Kicmenjaci";
+      catName = 'Kicmenjaci';
       break;
     case 8:
-      catName = "Protozoe, sundjeri, zarnjaci";
+      catName = 'Protozoe, sundjeri, zarnjaci';
       break;
     case 9:
-      catName = "Tkiva test za prijemni";
+      catName = 'Tkiva test za prijemni';
       break;
     case 10:
-      catName = "Biljni organi i razn. zivog sveta";
+      catName = 'Biljni organi i razn. zivog sveta';
+      break;
+    case 11:
+      catName = 'Mehanizmi nasledjivanja';
+      break;
+    case 12:
+      catName = 'Molekularna bilogija';
       break;
   }
 
@@ -1216,9 +1254,9 @@ function getCatName(catId) {
 
 function isElemVisable(elem, choice) {
   if (choice == true) {
-    elem.classList.remove("hide");
+    elem.classList.remove('hide');
   } else if (choice == false) {
-    elem.classList.add("hide");
+    elem.classList.add('hide');
   }
 }
 
@@ -1240,58 +1278,68 @@ function pickCategory(catId) {
 
 function wrQuestionArrayAdd(question) {
   switch (question.questionID.substr(0, 3)) {
-    case "cel":
+    case 'cel':
       ctg1.push(
         parseInt(question.questionID.substr(3, question.questionID.length - 1))
       );
       break;
-    case "vib":
+    case 'vib':
       ctg2.push(
         parseInt(question.questionID.substr(3, question.questionID.length - 1))
       );
       break;
-    case "ezt":
+    case 'ezt':
       ctg3.push(
         parseInt(question.questionID.substr(3, question.questionID.length - 1))
       );
       break;
-    case "ztc":
+    case 'ztc':
       ctg4.push(
         parseInt(question.questionID.substr(3, question.questionID.length - 1))
       );
       break;
-    case "czt":
+    case 'czt':
       ctg5.push(
         parseInt(question.questionID.substr(3, question.questionID.length - 1))
       );
       break;
-    case "bto":
+    case 'bto':
       ctg6.push(
         parseInt(question.questionID.substr(3, question.questionID.length - 1))
       );
       break;
-    case "bkm":
+    case 'bkm':
       ctg7.push(
         parseInt(question.questionID.substr(3, question.questionID.length - 1))
       );
       break;
-    case "kcm":
+    case 'kcm':
       ctg8.push(
         parseInt(question.questionID.substr(3, question.questionID.length - 1))
       );
       break;
-    case "psz":
+    case 'psz':
       ctg9.push(
         parseInt(question.questionID.substr(3, question.questionID.length - 1))
       );
       break;
-    case "ttp":
+    case 'ttp':
       ctg10.push(
         parseInt(question.questionID.substr(3, question.questionID.length - 1))
       );
       break;
-    case "bor":
+    case 'bor':
       ctg11.push(
+        parseInt(question.questionID.substr(3, question.questionID.length - 1))
+      );
+      break;
+    case 'mnt':
+      ctg12.push(
+        parseInt(question.questionID.substr(3, question.questionID.length - 1))
+      );
+      break;
+    case 'mbt':
+      ctg13.push(
         parseInt(question.questionID.substr(3, question.questionID.length - 1))
       );
       break;
@@ -1310,52 +1358,62 @@ function resetWrQuestionArrayAdd() {
   ctg9 = [];
   ctg10 = [];
   ctg11 = [];
+  ctg12 = [];
+  ctg13 = [];
 }
 
 function addAllArrays() {
   allArrayWrong.push({
-    cat: "Celije",
+    cat: 'Celije',
     wqArray: ctg1
   });
   allArrayWrong.push({
-    cat: "Virusi i bakterije",
+    cat: 'Virusi i bakterije',
     wqArray: ctg2
   });
   allArrayWrong.push({
-    cat: "Ekologija zavrsni test",
+    cat: 'Ekologija zavrsni test',
     wqArray: ctg3
   });
   allArrayWrong.push({
-    cat: "Zavrsni test citologija",
+    cat: 'Zavrsni test citologija',
     wqArray: ctg4
   });
   allArrayWrong.push({
-    cat: "Citologija zavrsni test",
+    cat: 'Citologija zavrsni test',
     wqArray: ctg5
   });
   allArrayWrong.push({
-    cat: "Biljna ktiva i organi",
+    cat: 'Biljna ktiva i organi',
     wqArray: ctg6
   });
   allArrayWrong.push({
-    cat: "Beskicmenjaci",
+    cat: 'Beskicmenjaci',
     wqArray: ctg7
   });
   allArrayWrong.push({
-    cat: "Kicmenjaci",
+    cat: 'Kicmenjaci',
     wqArray: ctg8
   });
   allArrayWrong.push({
-    cat: "Protozoe, sundjeri, zarnjaci",
+    cat: 'Protozoe, sundjeri, zarnjaci',
     wqArray: ctg9
   });
   allArrayWrong.push({
-    cat: "Tkiva test za prijemni",
+    cat: 'Tkiva test za prijemni',
     wqArray: ctg10
   });
   allArrayWrong.push({
-    cat: "Biljni organi i raznovrsnost zivog sveta",
+    cat: 'Biljni organi i raznovrsnost zivog sveta',
     wqArray: ctg11
+  });
+  allArrayWrong.push({
+    cat: 'Mehanizmi nasledjivanja test',
+    wqArray: ctg12
+  });
+  allArrayWrong.push({
+    cat: 'Molekularna bilogija test',
+    wqArray: ctg13
   });
 }
 
@@ -1386,8 +1444,8 @@ function setTimer(minutes) {
       clearInterval(x);
       isElemVisable(timer, false);
       isElemVisable(submitBtn, false);
-      contentTitle.innerHTML = "";
-      contentMain.innerHTML = "";
+      contentTitle.innerHTML = '';
+      contentMain.innerHTML = '';
       currentQuestion = questions.length;
       nextBtn.click();
     }
@@ -1406,14 +1464,14 @@ function getCategoryBtnId(event) {
 
 function generateQuestionIdsArrayToLS(questions) {
   let allQuestionIdsArray =
-    JSON.parse(localStorage.getItem("validQuestions")) || [];
+    JSON.parse(localStorage.getItem('validQuestions')) || [];
 
   if (allQuestionIdsArray.length == 0) {
     for (let i = 0; i < questions.length; i++) {
       allQuestionIdsArray.push(i + 1);
     }
     allQuestionIdsArray = shuffle(allQuestionIdsArray);
-    localStorage.setItem("validQuestions", JSON.stringify(allQuestionIdsArray));
+    localStorage.setItem('validQuestions', JSON.stringify(allQuestionIdsArray));
   }
 }
 
@@ -1425,7 +1483,7 @@ function resetValidQuestions(questions) {
   }
 
   allQuestionIdsArray = shuffle(allQuestionIdsArray);
-  localStorage.setItem("validQuestions", JSON.stringify(allQuestionIdsArray));
+  localStorage.setItem('validQuestions', JSON.stringify(allQuestionIdsArray));
 }
 
 function shuffle(array) {
@@ -1455,14 +1513,14 @@ function getCurrentDate() {
   let yyyy = today.getFullYear();
 
   if (dd < 10) {
-    dd = "0" + dd;
+    dd = '0' + dd;
   }
 
   if (mm < 10) {
-    mm = "0" + mm;
+    mm = '0' + mm;
   }
 
-  today = dd + "/" + mm + "/" + yyyy;
+  today = dd + '/' + mm + '/' + yyyy;
 
   return today;
 }

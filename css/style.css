@@ -5,7 +5,7 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   color: #aeedf8;
-  font-family: "Comfortaa", cursive;
+  font-family: 'Comfortaa', cursive;
 }
 
 body {
@@ -64,7 +64,7 @@ body {
       grid-template-columns: 1fr 5fr;
   -ms-grid-rows: 5fr 0.35fr;
       grid-template-rows: 5fr 0.35fr;
-      grid-template-areas: "leftSideContentItem contentItem" ". actionBtnsItem";
+      grid-template-areas: 'leftSideContentItem contentItem' '. actionBtnsItem';
 }
 
 .leftSideContent {
@@ -122,7 +122,7 @@ body {
   display: grid;
   -ms-grid-rows: 1.5fr 6fr;
       grid-template-rows: 1.5fr 6fr;
-      grid-template-areas: "contentTitleItem" "mainContentItem";
+      grid-template-areas: 'contentTitleItem' 'mainContentItem';
 }
 
 .answers {
@@ -215,15 +215,11 @@ body {
 }
 
 .categories {
-  height: 100%;
-  width: 100%;
+  width: 90%;
+  margin: auto;
   display: -ms-grid;
   display: grid;
   padding: 0.5em;
-  -ms-grid-columns: (1fr)[4];
-      grid-template-columns: repeat(4, 1fr);
-  -ms-grid-rows: (1fr)[3];
-      grid-template-rows: repeat(3, 1fr);
   grid-gap: 0.5em;
 }
 
@@ -481,7 +477,7 @@ details summary::-webkit-details-marker {
 details summary:before {
   font: normal normal normal 1em/1 FontAwesome;
   font-weight: 900;
-  content: "";
+  content: '';
   margin-right: 0.5em;
 }
 
@@ -567,7 +563,7 @@ details ul li:before {
   top: 0;
   left: 0;
   float: left;
-  content: "";
+  content: '';
   width: 0em;
   height: 1em;
   border-left: 1px solid #ccc;
@@ -579,7 +575,7 @@ details ul li:after {
   top: 0;
   left: 0;
   float: left;
-  content: "";
+  content: '';
   width: 1em;
   height: 100%;
   border-left: 1px solid #cccccc;
