@@ -19668,26 +19668,22 @@
         "answers": [
           {
             "answerID": 1,
-            "answer": "u slučaju da je:"
-          },
-          {
-            "answerID": 2,
             "answer": "jedan roditelj nosilac translokacije 21/14"
           },
           {
-            "answerID": 3,
+            "answerID": 2,
             "answer": "majka starija od 35 godina"
           },
           {
-            "answerID": 4,
+            "answerID": 3,
             "answer": "prethodno dete imalo srpastu anemiju"
           },
           {
-            "answerID": 5,
+            "answerID": 4,
             "answer": "prethodno dete imalo Edwardsov sindrom"
           },
           {
-            "answerID": 6,
+            "answerID": 5,
             "answer": "u svim navedenim slučajevima određuje se kariotip deteta"
           }
         ],
@@ -19699,7 +19695,7 @@
       },
       {
         "questionID": "mnt82",
-        "question": "Koliko akrocentričnih hromozoma ima u kariotipu muške osobe nosioca  translokacije 14/21:",
+        "question": "Koliko akrocentričnih hromozoma ima u kariotipu muške osobe nosioca translokacije 14/21:",
         "answers": [
           {
             "answerID": 1,
@@ -19724,7 +19720,7 @@
         ],
         "correctAnswers": [
           {
-            "correctAnswer": 9
+            "correctAnswer": 3
           }
         ]
       },
@@ -19808,7 +19804,7 @@
           },
           {
             "answerID": 4,
-            "answer": "d) svi odgovori su tačni"
+            "answer": "svi odgovori su tačni"
           },
           {
             "answerID": 5,
@@ -20773,7 +20769,7 @@
       },
       {
         "questionID": "mnt118",
-        "question": "Koliko akrocentričnih hromozoma sadrži spermatozoid muškarca :",
+        "question": "Koliko akrocentričnih hromozoma sadrži spermatozoid muškarca:",
         "answers": [
           {
             "answerID": 1,
@@ -20781,7 +20777,7 @@
           },
           {
             "answerID": 2,
-            "answer": " 1 ili 2    "
+            "answer": " 1 ili 2"
           },
           {
             "answerID": 3,
@@ -21234,19 +21230,19 @@
         "answers": [
           {
             "answerID": 1,
-            "answer": "10      "
+            "answer": "10"
           },
           {
             "answerID": 2,
-            "answer": "11    "
+            "answer": "11"
           },
           {
             "answerID": 3,
-            "answer": "5    "
+            "answer": "5"
           },
           {
             "answerID": 4,
-            "answer": "6    "
+            "answer": "6"
           },
           {
             "answerID": 5,
@@ -22760,26 +22756,22 @@
         "answers": [
           {
             "answerID": 1,
-            "answer": "dete.To znači da :"
-          },
-          {
-            "answerID": 2,
             "answer": "je dete usvojeno"
           },
           {
-            "answerID": 3,
+            "answerID": 2,
             "answer": "roditelji imaju isti genotip"
           },
           {
-            "answerID": 4,
+            "answerID": 3,
             "answer": "je gen za Rh-sistem uvek dominantan"
           },
           {
-            "answerID": 5,
+            "answerID": 4,
             "answer": "gen za Rh-sistem obrazuje veći broj alela"
           },
           {
-            "answerID": 6,
+            "answerID": 5,
             "answer": "je u pitanju kodominantan odnos alela"
           }
         ],
@@ -23829,7 +23821,7 @@
       },
       {
         "questionID": "mnt218",
-        "question": "Mendelovopravilo  važi za obrazovanje :",
+        "question": "Mendelovo 1. pravilo važi za obrazovanje :",
         "answers": [
           {
             "answerID": 1,
@@ -25602,26 +25594,22 @@
         "answers": [
           {
             "answerID": 1,
-            "answer": "osoba:"
-          },
-          {
-            "answerID": 2,
             "answer": "A i AB krvne grupe"
           },
           {
-            "answerID": 3,
+            "answerID": 2,
             "answer": "B krvne grupe"
           },
           {
-            "answerID": 4,
+            "answerID": 3,
             "answer": "B i O krvne grupe"
           },
           {
-            "answerID": 5,
+            "answerID": 4,
             "answer": "A krvne grupe"
           },
           {
-            "answerID": 6,
+            "answerID": 5,
             "answer": "A i O krvne grupe"
           }
         ],
@@ -29226,26 +29214,22 @@
         "answers": [
           {
             "answerID": 1,
-            "answer": "molekula DNK čine:"
-          },
-          {
-            "answerID": 2,
             "answer": "šećer i azotna baza"
           },
           {
-            "answerID": 3,
+            "answerID": 2,
             "answer": "šećer i fosfatna grupa"
           },
           {
-            "answerID": 4,
+            "answerID": 3,
             "answer": "fosfatne grupe međusobno povezane"
           },
           {
-            "answerID": 5,
+            "answerID": 4,
             "answer": "azotne baze povezane vodoničnim vezama"
           },
           {
-            "answerID": 6,
+            "answerID": 5,
             "answer": "dezoksiriboze vezane za azotne baze"
           }
         ],
@@ -30921,7 +30905,7 @@
       },
       {
         "questionID": "mbt147",
-        "question": "Aminokisleina se vezuje za kraj t-RNK na kome:",
+        "question": "Aminokiselina se vezuje za kraj t-RNK na kome:",
         "answers": [
           {
             "answerID": 1,

@@ -13,7 +13,7 @@ body {
   height: 100vh;
   background: url('/img/body.jpg') no-repeat center/cover;
   padding-top: 10vh;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 2em;
 }
 
@@ -45,7 +45,7 @@ body {
 
 .container {
   height: 99%;
-  width: 50%;
+  width: 70%;
   margin: auto;
   display: grid;
   grid-template-columns: 1fr 5fr;
@@ -179,6 +179,21 @@ body {
   display: grid;
   padding: 0.5em;
   grid-gap: 0.5em;
+}
+
+.inSt {
+  color: black;
+  //display: block !important;
+  height: 40%;
+  font-size: 18px;
+  position: relative;
+  visibility: visible !important;
+}
+
+select,
+option {
+  height: 40%;
+  color: black;
 }
 
 .actionBtns {

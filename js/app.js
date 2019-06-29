@@ -13,6 +13,7 @@ const saveBtn = document.querySelector('.saveBtn');
 const questionNum = document.querySelector('.questionNum');
 const another60Btn = document.querySelector('#another60Btn');
 const categoriesBtn = document.querySelector('#categoriesBtn');
+const showNextBtn = document.querySelector('#showNextBtn');
 
 let tl = new TimelineMax();
 tl.add(TweenMax.to(homeBtns, 0.8, { opacity: 1, width: '95%' }));
@@ -93,6 +94,50 @@ function initApp() {
 initApp();
 
 /* EVENTS */
+
+showNextBtn.addEventListener('click', function() {
+  let qNums = document.querySelector('.inSt').value;
+  console.log(qNums);
+  let qNumArr = qNums.split(/\s*,\s*/);
+  console.log(qNumArr);
+  let pickedCat = document.querySelector('.opt');
+  let pCat = pickedCat.options[pickedCat.selectedIndex].value;
+  console.log(pCat);
+  let cat = getQuestionCatId(parseInt(pCat));
+  console.log(cat);
+  let result = [];
+  pickCategoryAllQuestions(parseInt(pCat));
+  for (let i = 0; i < qNumArr.length; i++) {
+    console.log(cat + qNumArr[i]);
+    let rez = questions.filter(obj => {
+      return obj.questionID === cat + qNumArr[i];
+    });
+    result.push(rez);
+  }
+  console.log(result);
+  let para = '';
+  result.forEach(res => {
+    let str = res[0].questionID;
+    para += '[ ' + str.slice(3) + '. ] ' + res[0].question + '<br><hr>';
+    let corAnsArr = [];
+    res[0].correctAnswers.forEach(corAns => {
+      corAnsArr.push(corAns.correctAnswer);
+    });
+    console.log(corAnsArr);
+    res[0].answers.forEach(ans => {
+      if (corAnsArr.includes(ans.answerID)) {
+        para += '==> ' + ans.answer + '<br>';
+      } else {
+        para += ans.answer + '<br>';
+      }
+    });
+    para += '<hr><br>';
+  });
+  contentMain.innerHTML = para;
+  contentMain.style.overflowY = 'scroll';
+  contentMain.style.textAlign = 'center';
+  contentMain.style.background = 'rgba(1, 4, 5, 0.9)';
+});
 
 leftSideContent.addEventListener('click', function() {
   myFunc(event);
@@ -362,6 +407,7 @@ saveBtn.addEventListener('click', function() {
 categoriesBtn.addEventListener('click', function() {
   categories();
 });
+
 /* MAIN FUNCTIONS */
 
 function animateHomeBtnsOut(btnEvent) {
@@ -411,30 +457,7 @@ function myFunc(event) {
         break;
       case 'allQw':
         animateHomeBtnsOut(ev);
-        catId = -1;
-        pickCategory(catId);
-        resetValidQuestions(questions);
-        let newWr = [];
-        localStorage.setItem('scores', JSON.stringify(newWr));
-        localStorage.setItem('scoresBook1', JSON.stringify(newWr));
-        localStorage.setItem('scoresBook2', JSON.stringify(newWr));
-        localStorage.setItem('scoresBook3', JSON.stringify(newWr));
-        testFF = JSON.parse(localStorage.getItem('scores')) || [];
-        console.log('==========NEW TEST FF==========');
-        console.log(testFF);
-        console.log('====================================');
-        testFFB = JSON.parse(localStorage.getItem('scoresBook1')) || [];
-        console.log('==========NEW BOOK1 FF==========');
-        console.log(testFFB);
-        console.log('====================================');
-        testFFB2 = JSON.parse(localStorage.getItem('scoresBook2')) || [];
-        console.log('==========NEW BOOK2 FF==========');
-        console.log(testFFB2);
-        console.log('====================================');
-        testFFB3 = JSON.parse(localStorage.getItem('scoresBook3')) || [];
-        console.log('==========NEW BOOK2 FF==========');
-        console.log(testFFB3);
-        console.log('====================================');
+        getQuestion();
         break;
     }
   }
@@ -504,6 +527,38 @@ function categories() {
       }
     })
   );
+}
+
+function getQuestion() {
+  let pickCategory = document.createElement('select');
+  pickCategory.classList.add('opt');
+  let categoryOptions = [
+    'Celije',
+    'Virusi i bakterije',
+    'Ekologija zavrsni test',
+    'Zavrsni test citologija',
+    'Citologija zavrsni test',
+    'Biljna tkiva i organi',
+    'Beskicmenjaci',
+    'Kicmenjaci',
+    'Protozoe, sundjeri, zarnjaci',
+    'Tkiva test za prijemni',
+    'Biljni organi i razn. zivog sveta',
+    'Mehanizmi nasledjivanja test',
+    'Molekularna biologija test'
+  ];
+  for (let i = 0; i < 13; i++) {
+    let opt = document.createElement('option');
+    opt.value = i.toString();
+    opt.innerHTML = categoryOptions[i];
+    pickCategory.appendChild(opt);
+  }
+  contentTitle.appendChild(pickCategory);
+  let questionNumbers = document.createElement('input');
+  questionNumbers.type = 'text';
+  questionNumbers.classList.add('inSt');
+  contentTitle.appendChild(questionNumbers);
+  isElemVisable(showNextBtn, true);
 }
 
 function prepareQuestions(questions) {
@@ -1252,6 +1307,53 @@ function getCatName(catId) {
   return catName;
 }
 
+function getQuestionCatId(catId) {
+  let catName;
+  switch (catId) {
+    case 0:
+      catName = 'cel';
+      break;
+    case 1:
+      catName = 'vib';
+      break;
+    case 2:
+      catName = 'ezt';
+      break;
+    case 3:
+      catName = 'ztc';
+      break;
+    case 4:
+      catName = 'czt';
+      break;
+    case 5:
+      catName = 'bto';
+      break;
+    case 6:
+      catName = 'bkm';
+      break;
+    case 7:
+      catName = 'kcm';
+      break;
+    case 8:
+      catName = 'psz';
+      break;
+    case 9:
+      catName = 'ttp';
+      break;
+    case 10:
+      catName = 'bor';
+      break;
+    case 11:
+      catName = 'mnt';
+      break;
+    case 12:
+      catName = 'mbt';
+      break;
+  }
+
+  return catName;
+}
+
 function isElemVisable(elem, choice) {
   if (choice == true) {
     elem.classList.remove('hide');
@@ -1272,7 +1374,21 @@ function pickCategory(catId) {
     });
   } else {
     questions = questionData[catId].items;
-    questions = shuffle(questions);
+  }
+  questions = shuffle(questions);
+}
+function pickCategoryAllQuestions(catId) {
+  //score = 0;
+  questions = [];
+
+  if (catId == -1) {
+    questionData.map(kat => {
+      kat.items.map(item => {
+        questions.push(item);
+      });
+    });
+  } else {
+    questions = questionData[catId].items;
   }
 }
 
