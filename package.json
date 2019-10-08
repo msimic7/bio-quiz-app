@@ -4,9 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev": "webpack --mode development",
-    "build": "webpack --mode production",
-    "start": "webpack-dev-server --mode development --open"
+    "devD": "webpack --mode development",
+    "buildD": "webpack --mode production",
+    "dev": "webpack-dev-server --mode development --open",
+    "start": "node server.js",
+    "heroku-postbuild": "webpack -p"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +24,7 @@
     "webpack-dev-server": "^3.8.0"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.4.4"
+    "@babel/polyfill": "^7.4.4",
+    "express": "^4.17.1"
   }
 }
