@@ -13,6 +13,10 @@ export const renderPage = () => {
 };
 
 export const renderTest60 = () => {
+  const markupHome = `
+    <div class="btn btnAction" id="btnHome" data-name="btnHome">HOME</div>
+  `;
+  DOM.actionButtons().insertAdjacentHTML('beforeend', markupHome);
   DOM.contentTitle().innerHTML = 'TEST60 SCORES';
   let markup = '';
   const scores = JSON.parse(localStorage.getItem('scores')) || [];
@@ -69,6 +73,10 @@ export const renderTest60 = () => {
 };
 
 export const renderBook1 = () => {
+  const markupHome = `
+    <div class="btn btnAction" id="btnHome" data-name="btnHome">HOME</div>
+  `;
+  DOM.actionButtons().insertAdjacentHTML('beforeend', markupHome);
   DOM.contentTitle().innerHTML = 'BOOK1 SCORES';
   let markup = '';
   const scores = JSON.parse(localStorage.getItem('scores')) || [];
@@ -128,6 +136,10 @@ export const renderBook1 = () => {
 };
 
 export const renderBook2 = () => {
+  const markupHome = `
+    <div class="btn btnAction" id="btnHome" data-name="btnHome">HOME</div>
+  `;
+  DOM.actionButtons().insertAdjacentHTML('beforeend', markupHome);
   DOM.contentTitle().innerHTML = 'BOOK2 SCORES';
   let markup = '';
   const scores = JSON.parse(localStorage.getItem('scores')) || [];
@@ -187,6 +199,10 @@ export const renderBook2 = () => {
 };
 
 export const renderBook3 = () => {
+  const markupHome = `
+    <div class="btn btnAction" id="btnHome" data-name="btnHome">HOME</div>
+  `;
+  DOM.actionButtons().insertAdjacentHTML('beforeend', markupHome);
   DOM.contentTitle().innerHTML = 'BOOK3 SCORES';
   let markup = '';
   const scores = JSON.parse(localStorage.getItem('scores')) || [];
