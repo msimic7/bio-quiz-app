@@ -5,7 +5,7 @@ export const renderPage = () => {
     <div class="btn btnHome" data-name="test60"><p>TEST 60</p></div>
     <div class="btn btnHome" data-name="cat"><p>CATEGORIES</p></div>
     <div class="btn btnHome" data-name="allSc"><p>ALL SCORES</p></div>
-    <div class="btn btnHome" data-name="allQw"><p>ALL QUESTIONS</p></div>
+    <div class="btnHomeTODO" data-name="allQw"><p></p></div>
     `;
   DOM.leftSideContent().insertAdjacentHTML('beforeend', markup);
   animateContentIn();

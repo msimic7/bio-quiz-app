@@ -4,7 +4,7 @@ export default class Questions {
   constructor() {
     this.allQuestions = [];
     data.forEach(cat => {
-      cat.questions.forEach(question => {
+      cat.items.forEach(question => {
         this.allQuestions.push(question);
       });
     });
@@ -23,10 +23,20 @@ export default class Questions {
   }
 
   getRandomizedCategoryQuestions(id) {
-    let ids = this.arrayShuffle([...Array(data[id].questions.length).keys()]);
+    let ids = this.arrayShuffle([...Array(data[id].items.length).keys()]);
     let randomQuestions = [];
     ids.forEach(qId => {
-      randomQuestions.push(data[id].questions[qId]);
+      randomQuestions.push(data[id].items[qId]);
+    });
+    return randomQuestions;
+  }
+
+  getRandom60() {
+    let ids = this.arrayShuffle([...Array(this.allQuestions.length).keys()]);
+    ids = ids.slice(0, 10);
+    let randomQuestions = [];
+    ids.forEach(qId => {
+      randomQuestions.push(this.allQuestions[qId]);
     });
     return randomQuestions;
   }

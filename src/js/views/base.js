@@ -2,6 +2,7 @@ export const DOM = {
   btnNext: () => document.querySelector('#btnNext'),
   btnSubmit: () => document.querySelector('#btnSubmit'),
   btnSave: () => document.querySelector('.btnSave'),
+  btnHome: () => document.querySelector('#btnHome'),
   contentMain: () => document.querySelector('.contentMain'),
   contentTitle: () => document.querySelector('.contentTitle'),
   leftSideContent: () => document.querySelector('.leftSideContent'),
@@ -13,5 +14,6 @@ export const DOM = {
   categories: () => document.querySelector('[data-name="cat"]'),
   allScores: () => document.querySelector('[data-name="allSc"]'),
   allQuestions: () => document.querySelector('[data-name="allQw"]'),
-  questionNum: () => document.querySelector('.questionNum')
+  questionNum: () => document.querySelector('.questionNum'),
+  test60Scores: () => document.querySelector('.questionNum')
 };

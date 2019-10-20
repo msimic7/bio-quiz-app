@@ -11,3 +11,236 @@ export const renderPage = () => {
     `;
   DOM.contentMain().insertAdjacentHTML('beforeend', markup);
 };
+
+export const renderTest60 = () => {
+  DOM.contentTitle().innerHTML = 'TEST60 SCORES';
+  let markup = '';
+  const scores = JSON.parse(localStorage.getItem('scores')) || [];
+  if (!scores && !scores.test60) {
+    markup = ``;
+  } else {
+    scores.test60.forEach((scoreDate, i) => {
+      console.log(scoreDate);
+      let markup3 = '';
+      scoreDate.wrongQuestions.forEach((score, i) => {
+        let markup1 = '';
+        score.forEach(questions => {
+          const markup = `
+          <li>
+            <label>
+              <div>${questions.catName}: ${questions.questions.join(', ')}</div>
+            </label>
+          </li>
+          `;
+          markup1 += markup;
+        });
+        const markup2 = `
+        <li>
+            <input type="checkbox" name="score${i}" id="score${i}">
+              <label for="score${i}">
+                <div">Test ${i + 1}</div>
+              </label>
+              <ul>
+                  ${markup1}
+              </ul>
+        </li>
+        `;
+        markup3 += markup2;
+      });
+      markup = `
+      <ul class="treeview">
+        <li>
+            <input type="checkbox" name="scoreDate${i}" id="scoreDate${i}">
+              <label for="scoreDate${i}">
+                <div">${scoreDate.date}</div">
+              </label>
+              <ul>
+                  ${markup3}
+              </ul>
+        </li>
+      </ul>
+      `;
+      DOM.contentMain().insertAdjacentHTML('beforeend', markup);
+    });
+  }
+
+  DOM.contentMain().classList.remove('allScores');
+  DOM.contentMain().style.overflow = 'auto  ';
+};
+
+export const renderBook1 = () => {
+  DOM.contentTitle().innerHTML = 'BOOK1 SCORES';
+  let markup = '';
+  const scores = JSON.parse(localStorage.getItem('scores')) || [];
+
+  if (!scores && !scores.book1) {
+    markup = ``;
+  } else {
+    scores.book1.forEach((scoreDate, i) => {
+      let markup3 = '';
+      const score = scoreDate.wrongQuestions;
+      Object.keys(score).forEach((item, i) => {
+        if (score[item].questions.length > 0) {
+          let markup1 = '';
+          score[item].questions.forEach((questions, i) => {
+            const markup = `
+          <li>
+            <label>
+              <div>Test${i + 1}: ${questions.join(', ')}</div>
+            </label>
+          </li>
+          `;
+            markup1 += markup;
+          });
+          const markup2 = `
+        <li>
+            <input type="checkbox" name="score${i}" id="score${i}">
+              <label for="score${i}">
+                <div">${score[item].catName}</div>
+              </label>
+              <ul>
+                  ${markup1}
+              </ul>
+        </li>
+        `;
+          markup3 += markup2;
+        }
+      });
+      markup = `
+      <ul class="treeview">
+        <li>
+            <input type="checkbox" name="scoreDate${i}" id="scoreDate${i}">
+              <label for="scoreDate${i}">
+                <div">${scoreDate.date}</div">
+              </label>
+              <ul>
+                  ${markup3}
+              </ul>
+        </li>
+      </ul>
+      `;
+    });
+  }
+
+  DOM.contentMain().classList.remove('allScores');
+  DOM.contentMain().style.overflow = 'auto  ';
+  DOM.contentMain().insertAdjacentHTML('beforeend', markup);
+};
+
+export const renderBook2 = () => {
+  DOM.contentTitle().innerHTML = 'BOOK2 SCORES';
+  let markup = '';
+  const scores = JSON.parse(localStorage.getItem('scores')) || [];
+
+  if (!scores && !scores.book2) {
+    markup = ``;
+  } else {
+    scores.book2.forEach((scoreDate, i) => {
+      let markup3 = '';
+      const score = scoreDate.wrongQuestions;
+      Object.keys(score).forEach((item, i) => {
+        if (score[item].questions.length > 0) {
+          let markup1 = '';
+          score[item].questions.forEach((questions, i) => {
+            const markup = `
+          <li>
+            <label>
+              <div>Test${i + 1}: ${questions.join(', ')}</div>
+            </label>
+          </li>
+          `;
+            markup1 += markup;
+          });
+          const markup2 = `
+        <li>
+            <input type="checkbox" name="score${i}" id="score${i}">
+              <label for="score${i}">
+                <div">${score[item].catName}</div>
+              </label>
+              <ul>
+                  ${markup1}
+              </ul>
+        </li>
+        `;
+          markup3 += markup2;
+        }
+      });
+      markup = `
+      <ul class="treeview">
+        <li>
+            <input type="checkbox" name="scoreDate${i}" id="scoreDate${i}">
+              <label for="scoreDate${i}">
+                <div">${scoreDate.date}</div">
+              </label>
+              <ul>
+                  ${markup3}
+              </ul>
+        </li>
+      </ul>
+      `;
+    });
+  }
+
+  DOM.contentMain().classList.remove('allScores');
+  DOM.contentMain().style.overflow = 'auto  ';
+  DOM.contentMain().insertAdjacentHTML('beforeend', markup);
+};
+
+export const renderBook3 = () => {
+  DOM.contentTitle().innerHTML = 'BOOK3 SCORES';
+  let markup = '';
+  const scores = JSON.parse(localStorage.getItem('scores')) || [];
+
+  if (!scores && !scores.book3) {
+    markup = ``;
+  } else {
+    scores.book3.forEach((scoreDate, i) => {
+      let markup3 = '';
+      const score = scoreDate.wrongQuestions;
+      Object.keys(score).forEach((item, i) => {
+        if (score[item].questions.length > 0) {
+          let markup1 = '';
+          score[item].questions.forEach((questions, i) => {
+            const markup = `
+          <li>
+            <label>
+              <div>Test${i + 1}: ${questions.join(', ')}</div>
+            </label>
+          </li>
+          `;
+            markup1 += markup;
+          });
+          const markup2 = `
+        <li>
+            <input type="checkbox" name="score${i}" id="score${i}">
+              <label for="score${i}">
+                <div">${score[item].catName}</div>
+              </label>
+              <ul>
+                  ${markup1}
+              </ul>
+        </li>
+        `;
+          markup3 += markup2;
+        }
+      });
+      markup = `
+      <ul class="treeview">
+        <li>
+            <input type="checkbox" name="scoreDate${i}" id="scoreDate${i}">
+              <label for="scoreDate${i}">
+                <div">${scoreDate.date}</div">
+              </label>
+              <ul>
+                  ${markup3}
+              </ul>
+        </li>
+      </ul>
+      `;
+    });
+  }
+
+  DOM.contentMain().classList.remove('allScores');
+  DOM.contentMain().style.overflow = 'auto  ';
+  DOM.contentMain().insertAdjacentHTML('beforeend', markup);
+};

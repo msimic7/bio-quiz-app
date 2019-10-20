@@ -19,7 +19,7 @@ export const renderQuiz = question => {
   DOM.leftSideContent().insertAdjacentHTML('beforeend', markup1);
   const markup2 = `
     <div class="btn btnAction" id="btnSubmit" data-name="btnSubmit">SUBMIT</div>
-    <div class="btn btnAction" id="btnNext" data-name="btnNext">NEXT</div>
+    <div class="btn btnAction hide" id="btnNext" data-name="btnNext">NEXT</div>
   `;
   DOM.actionButtons().insertAdjacentHTML('beforeend', markup2);
 };
@@ -28,4 +28,5 @@ export const clearQuiz = () => {
   DOM.contentTitle().innerHTML = '';
   DOM.contentMain().innerHTML = '';
   DOM.leftSideContent().innerHTML = '';
+  DOM.actionButtons().innerHTML = '';
 };

@@ -1,5 +1,6 @@
 import Questions from './models/Questions';
 import Question from './models/Question';
+import Score from './models/Score';
 
 import { DOM } from './views/base';
 import * as testView from './views/testView';
@@ -14,11 +15,12 @@ let state = {};
 
 const data = new Questions();
 
-function setState(questions) {
+function setState(questions, type) {
   state.questions = new Question(questions);
   state.score = 0;
   state.questionNum = 0;
   state.wrongQuestions = [];
+  state.type = type;
 }
 
 function isEqual(array1, array2) {
@@ -32,16 +34,8 @@ function isEqual(array1, array2) {
   return true;
 }
 
-/*function isAnswerCorrect(answers, answersLength) {
-  if (answersLength === 1)
-    return answers[0] === state.currentQuestion.correctAnswers[0];
-  else {
-    return isEqual(answers, state.currentQuestion.correctAnswers);
-  }
-}*/
-
-const quizControler = questionData => {
-  setState(questionData);
+const quizControler = (questionData, type) => {
+  setState(questionData, type);
 
   mainView.animateContentOut(DOM.test60());
   testView.clearQuiz();
@@ -54,38 +48,43 @@ const quizControler = questionData => {
 
     document.querySelectorAll('.answerInput').forEach((ans, i) => {
       if (ans.checked) answers.push(parseInt(ans.value));
-      ans.disabled = true;
-      labels[i].classList.remove('before');
     });
 
-    if (isEqual(answers, correctAnswers)) {
-      state.score += 1;
-      answers.forEach(el => {
-        labels[el - 1].classList.add('correct');
+    if (answers.length !== 0) {
+      document.querySelectorAll('.answerInput').forEach((ans, i) => {
+        ans.disabled = true;
+        labels[i].classList.remove('before');
       });
-    } else {
-      state.wrongQuestions.push(state.questions.currentQuestion.questionID);
 
-      answers
-        .filter(el => correctAnswers.includes(el))
-        .forEach(elem => {
-          if (elem) labels[elem - 1].classList.add('correct');
+      if (isEqual(answers, correctAnswers)) {
+        state.score += 1;
+        answers.forEach(el => {
+          labels[el - 1].classList.add('correct');
         });
+      } else {
+        state.wrongQuestions.push(state.questions.currentQuestion.questionID);
 
-      answers
-        .filter(el => !correctAnswers.includes(el))
-        .forEach(elem => {
-          if (elem) labels[elem - 1].classList.add('incorrect');
-        });
+        answers
+          .filter(el => correctAnswers.includes(el))
+          .forEach(elem => {
+            if (elem) labels[elem - 1].classList.add('correct');
+          });
 
-      correctAnswers
-        .filter(el => !answers.includes(el))
-        .forEach(elem => {
-          if (elem) labels[elem - 1].classList.add('correctDark');
-        });
+        answers
+          .filter(el => !correctAnswers.includes(el))
+          .forEach(elem => {
+            if (elem) labels[elem - 1].classList.add('incorrect');
+          });
+        correctAnswers
+          .filter(el => !answers.includes(el))
+          .forEach(elem => {
+            if (elem) labels[elem - 1].classList.add('correctDark');
+          });
+      }
+
+      DOM.btnSubmit().classList.add('hide');
+      DOM.btnNext().classList.remove('hide');
     }
-
-    DOM.btnSubmit().classList.add('hide');
   });
 
   DOM.btnNext().addEventListener('click', () => {
@@ -98,12 +97,23 @@ const quizControler = questionData => {
         state.questions.currentQuestion,
         state.questionNum
       );
+      DOM.btnSubmit().classList.remove('hide');
+      DOM.btnNext().classList.add('hide');
     } else {
       //TODO show score
       testView.clearQuiz();
       scoreView.renderPage(state);
+      DOM.btnHome().addEventListener('click', () => {
+        location.reload();
+      });
+      console.log(state.type);
+      const sc = new Score(
+        state.type,
+        scoreView.renderWrongQuestions(state.wrongQuestions)
+      );
+      console.log(sc);
+      sc.saveScore();
     }
-    DOM.btnSubmit().classList.remove('hide');
   });
 
   DOM.btnSave().addEventListener('click', () => {
@@ -118,7 +128,7 @@ window.addEventListener('load', () => {
   mainView.renderPage();
 
   DOM.test60().addEventListener('click', () =>
-    quizControler(data.getAllData())
+    quizControler(data.getRandom60(), -1)
   );
 
   DOM.categories().addEventListener('click', e => {
@@ -127,14 +137,39 @@ window.addEventListener('load', () => {
     DOM.contentMain().addEventListener('click', e => {
       const elem = e.target.closest('.category');
       if (elem) {
-        quizControler(data.getData()[elem.dataset.id].questions);
+        console.log(elem.dataset.id);
+        quizControler(
+          data.getRandomizedCategoryQuestions(elem.dataset.id),
+          parseInt(elem.dataset.id)
+        );
       }
+    });
+    DOM.btnHome().addEventListener('click', () => {
+      location.reload();
     });
   });
 
   DOM.allScores().addEventListener('click', e => {
     mainView.animateContentOut(DOM.allScores());
     allScoresView.renderPage();
+    DOM.contentMain().addEventListener('click', e => {
+      const elem = e.target.closest('.allScoresBtn');
+      if (elem) {
+        if (elem.dataset.id === '0') {
+          testView.clearQuiz();
+          allScoresView.renderTest60();
+        } else if (elem.dataset.id === '1') {
+          testView.clearQuiz();
+          allScoresView.renderBook1();
+        } else if (elem.dataset.id === '2') {
+          testView.clearQuiz();
+          allScoresView.renderBook2();
+        } else if (elem.dataset.id === '3') {
+          testView.clearQuiz();
+          allScoresView.renderBook3();
+        }
+      }
+    });
   });
 
   DOM.allQuestions().addEventListener('click', e => {
