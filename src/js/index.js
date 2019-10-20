@@ -100,7 +100,6 @@ const quizControler = (questionData, type) => {
       DOM.btnSubmit().classList.remove('hide');
       DOM.btnNext().classList.add('hide');
     } else {
-      //TODO show score
       testView.clearQuiz();
       scoreView.renderPage(state);
       DOM.btnHome().addEventListener('click', () => {
@@ -137,7 +136,6 @@ window.addEventListener('load', () => {
     DOM.contentMain().addEventListener('click', e => {
       const elem = e.target.closest('.category');
       if (elem) {
-        console.log(elem.dataset.id);
         quizControler(
           data.getRandomizedCategoryQuestions(elem.dataset.id),
           parseInt(elem.dataset.id)
@@ -168,6 +166,9 @@ window.addEventListener('load', () => {
           testView.clearQuiz();
           allScoresView.renderBook3();
         }
+        DOM.btnHome().addEventListener('click', () => {
+          location.reload();
+        });
       }
     });
   });
