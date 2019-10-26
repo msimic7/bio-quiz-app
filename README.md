@@ -1,6 +1,8 @@
 # BIOQUIZ
 Application used for doing biology entrance examination tests for School of Applied Health Sciences.
 
+Live: https://bio-quiz-app.herokuapp.com
+
 Built using:
 
   - HTML5
@@ -8,6 +10,6 @@ Built using:
   - JavaScript
   - Webpack
 
-Code orginised in MVC structure.
+Code organised in MVC structure.
 
 Raw data parsed into JSON with Python.
