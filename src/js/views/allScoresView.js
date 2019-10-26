@@ -1,7 +1,7 @@
 import { DOM } from './base';
 
 export const renderPage = () => {
-  DOM.contentTitle().innerHTML = 'CATEGORIES';
+  DOM.contentTitle().innerHTML = 'ALL SCORES';
   DOM.contentMain().classList = 'contentMain allScores';
   const markup = `
     <div class="btn allScoresBtn" data-id="0">TEST 60</div>
@@ -23,7 +23,7 @@ export const renderTest60 = () => {
   if (!scores && !scores.test60) {
     markup = ``;
   } else {
-    scores.test60.forEach((scoreDate, i) => {
+    scores.test60.forEach((scoreDate, j) => {
       console.log(scoreDate);
       let markup3 = '';
       scoreDate.wrongQuestions.forEach((score, i) => {
@@ -40,9 +40,9 @@ export const renderTest60 = () => {
         });
         const markup2 = `
         <li>
-            <input type="checkbox" name="score${i}" id="score${i}">
-              <label for="score${i}">
-                <div">Test ${i + 1}</div>
+            <input type="checkbox" name="score${j}${i}" id="score${j}${i}">
+              <label for="score${j}${i}">
+                <div>Test ${i + 1}</div>
               </label>
               <ul>
                   ${markup1}
@@ -54,9 +54,9 @@ export const renderTest60 = () => {
       markup = `
       <ul class="treeview">
         <li>
-            <input type="checkbox" name="scoreDate${i}" id="scoreDate${i}">
-              <label for="scoreDate${i}">
-                <div">${scoreDate.date}</div">
+            <input type="checkbox" name="scoreDate${j}" id="scoreDate${j}">
+              <label for="scoreDate${j}">
+                <div>${scoreDate.date}</div>
               </label>
               <ul>
                   ${markup3}
