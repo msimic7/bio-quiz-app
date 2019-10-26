@@ -1,7 +1,7 @@
 # BIOQUIZ
 Application used for doing biology entrance examination tests for School of Applied Health Sciences.
 
-Live: https://bio-quiz-app.herokuapp.com
+<a href="https://bio-quiz-app.herokuapp.com" target="blank"></a>
 
 Built using:
 
