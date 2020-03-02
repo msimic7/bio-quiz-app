@@ -105,12 +105,10 @@ const quizControler = (questionData, type) => {
       DOM.btnHome().addEventListener('click', () => {
         location.reload();
       });
-      console.log(state.type);
       const sc = new Score(
         state.type,
         scoreView.renderWrongQuestions(state.wrongQuestions)
       );
-      console.log(sc);
       sc.saveScore();
     }
   });

@@ -20,12 +20,10 @@ export const renderTest60 = () => {
   DOM.contentTitle().innerHTML = 'TEST60 SCORES';
   let markup = '';
   const scores = JSON.parse(localStorage.getItem('scores')) || [];
-  console.log(scores);
   if (scores.length === 0 || !scores.test60) {
     markup = ``;
   } else {
     scores.test60.forEach((scoreDate, j) => {
-      console.log(scoreDate);
       let markup3 = '';
       scoreDate.wrongQuestions.forEach((score, i) => {
         let markup1 = '';
