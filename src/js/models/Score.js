@@ -1,10 +1,10 @@
 export default class Score {
   constructor(qCateg, wrongQuestions) {
     const today = new Date();
-    const dd = today.getDate();
+    let dd = today.getDate();
 
-    const mm = today.getMonth() + 1;
-    const yyyy = today.getFullYear();
+    let mm = today.getMonth() + 1;
+    let yyyy = today.getFullYear();
     if (dd < 10) {
       dd = `0${dd}`;
     }

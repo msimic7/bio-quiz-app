@@ -20,7 +20,8 @@ export const renderTest60 = () => {
   DOM.contentTitle().innerHTML = 'TEST60 SCORES';
   let markup = '';
   const scores = JSON.parse(localStorage.getItem('scores')) || [];
-  if (!scores && !scores.test60) {
+  console.log(scores);
+  if (scores.length === 0 || !scores.test60) {
     markup = ``;
   } else {
     scores.test60.forEach((scoreDate, j) => {
@@ -64,8 +65,8 @@ export const renderTest60 = () => {
         </li>
       </ul>
       `;
-      DOM.contentMain().insertAdjacentHTML('beforeend', markup);
     });
+    DOM.contentMain().insertAdjacentHTML('beforeend', markup);
   }
 
   DOM.contentMain().classList.remove('allScores');
@@ -81,7 +82,7 @@ export const renderBook1 = () => {
   let markup = '';
   const scores = JSON.parse(localStorage.getItem('scores')) || [];
 
-  if (!scores && !scores.book1) {
+  if (scores.length === 0 || !scores.book1) {
     markup = ``;
   } else {
     scores.book1.forEach((scoreDate, i) => {
@@ -144,7 +145,7 @@ export const renderBook2 = () => {
   let markup = '';
   const scores = JSON.parse(localStorage.getItem('scores')) || [];
 
-  if (!scores && !scores.book2) {
+  if (scores.length === 0 || !scores.book2) {
     markup = ``;
   } else {
     scores.book2.forEach((scoreDate, i) => {
@@ -207,7 +208,7 @@ export const renderBook3 = () => {
   let markup = '';
   const scores = JSON.parse(localStorage.getItem('scores')) || [];
 
-  if (!scores && !scores.book3) {
+  if (scores.length === 0 || !scores.book3) {
     markup = ``;
   } else {
     scores.book3.forEach((scoreDate, i) => {
