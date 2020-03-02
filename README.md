@@ -3,6 +3,8 @@ Application used for doing biology entrance examination tests for School of Appl
 
 Live: https://bio-quiz-app.herokuapp.com
 
+Test60: gives only 10 random questions for easier testing.
+
 Built using:
 
   - HTML5
